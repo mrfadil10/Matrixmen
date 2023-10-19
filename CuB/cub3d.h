@@ -6,7 +6,7 @@
 /*   By: mfadil <mfadil@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/16 14:49:49 by mfadil            #+#    #+#             */
-/*   Updated: 2023/10/17 19:40:26 by mfadil           ###   ########.fr       */
+/*   Updated: 2023/10/19 21:52:01 by mfadil           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,49 @@
 # include <sys/types.h>
 # include <sys/stat.h>
 
+
+enum
+{
+	PLAYER = 99,
+};
+
+enum
+{
+	KEY_UP = 3,
+	KEY_DOWN = 2,
+	KEY_DESTROY = 17,
+};
+
+enum
+{
+	KEY_W = 13,
+	KEY_A = 0,
+	KEY_S = 1,
+	KEY_D = 2,
+	ESC = 53,
+};
+
+enum
+{
+	RIGHT_ARR = 1,
+	LEFT_ARR = 2,
+};
+
+enum
+{
+	TXT_NO = 0,
+	TXT_SO,
+	TXT_EA,
+	TXT_WE,
+};
+
+enum
+{
+	ON_KEYDOWN = 2,
+	ON_KEYUP = 3,
+	ON_DESTROY = 17,
+};
+
 typedef struct s_iter
 {
 	int	i;
@@ -42,6 +85,15 @@ typedef struct s_file
 	int		fd;
 	char	*path;
 } t_file;
+
+typedef struct s_img
+{
+	int		endian;
+	int		line_lnt;
+	int		bpp;
+	char	*addr;
+	void	*ref;
+}	t_img;
 
 typedef struct s_map
 {
@@ -95,6 +147,39 @@ typedef struct s_consts
 	float	mid_height;
 }	t_consts;
 
+typedef struct s_color
+{
+	int	r;
+	int	g;
+	int	b;
+}	t_color;
+
+typedef struct s_assets
+{
+	char	*north;
+	char	*south;
+	char	*east;
+	char	*west;
+}	t_assets;
+
+typedef struct s_err
+{
+	int		code;
+	char	*message;
+}	t_err;
+
+typedef struct s_character
+{
+	int			width;
+	int			height;
+	float		angle;
+	float		rotation;
+	float		rots_speed;
+	int			rots_dir;
+	int			walk_dir;
+	int			turn_dir;
+}	t_character;
+
 typedef struct s_main
 {
 	void		*mlx;
@@ -106,8 +191,19 @@ typedef struct s_main
 	t_parsing	parsing;
 	t_allocate	allocs;
 	t_consts	consts;
+	t_img		frame;
+	t_img		texture[4];
+	t_assets	assets;
+	t_err		error;
+	clock_t		time_to_start;
+	t_character	character;
 }	t_main;
 
 int	free_dbl_int(int **arr, size_t size);
+int	set_cub_error(t_main *game, char *message);
+int	init_cub3d(t_main *game);
+int	free_memory(t_main *game);
+int	key_hook_cub(t_main *game, int keycode);
+int	key_release(t_main *game, int keycode);
 
 #endif

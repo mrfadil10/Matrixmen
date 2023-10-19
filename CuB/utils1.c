@@ -6,11 +6,18 @@
 /*   By: mfadil <mfadil@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 11:32:19 by mfadil            #+#    #+#             */
-/*   Updated: 2023/10/17 15:41:35 by mfadil           ###   ########.fr       */
+/*   Updated: 2023/10/19 11:04:03 by mfadil           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+
+int	set_cub_error(t_main *game, char *message)
+{
+	game->error.message = message;
+	game->error.code = 1;
+	return (1);
+}
 
 int	free_cub3d(void *ptr)
 {

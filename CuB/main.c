@@ -6,7 +6,7 @@
 /*   By: mfadil <mfadil@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/16 14:47:53 by mfadil            #+#    #+#             */
-/*   Updated: 2023/10/17 21:55:37 by mfadil           ###   ########.fr       */
+/*   Updated: 2023/10/19 22:29:12 by mfadil           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,4 +40,12 @@ int	main(int ac, char **av)
 	// parsing
 	game.mlx = mlx_init();
 	game.window.reference = mlx_new_window(game.mlx, game.window.width, game.window.height, "cub3D");
+	if (init_cub3d(&game))
+		error_exit(&game, game.error.message);
+	srand((unsigned int) time(NULL));
+	game.time_to_start = clock();
+	mlx_hook(game.window.reference, ON_DESTROY, 0L, free_memory, &game);
+	mlx_hook(game.window.reference, ON_KEYDOWN, 0L, key_hook_cub, &game);
+	mlx_hook(game.window.reference, ON_KEYDOWN, 0L, key_release, &game);
+	mlx_loop_hook(game.window.reference, rendering_cub, &game);
 }
