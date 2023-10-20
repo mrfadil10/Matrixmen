@@ -6,7 +6,7 @@
 /*   By: mfadil <mfadil@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/16 14:49:49 by mfadil            #+#    #+#             */
-/*   Updated: 2023/10/19 21:52:01 by mfadil           ###   ########.fr       */
+/*   Updated: 2023/10/20 23:53:22 by mfadil           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,10 @@
 # include <sys/types.h>
 # include <sys/stat.h>
 
+# define WIN_WIDTH 1600
+# define WIN_HEIGHT 900
+# define FPS 40
+# define SIZEOF_TILE 64
 
 enum
 {
@@ -173,7 +177,7 @@ typedef struct s_character
 	int			width;
 	int			height;
 	float		angle;
-	float		rotation;
+	float		mov_speed;
 	float		rots_speed;
 	int			rots_dir;
 	int			walk_dir;
@@ -186,6 +190,7 @@ typedef struct s_main
 	bool		paused;
 	bool		freeze;
 	bool		over;
+	float		delta;
 	t_window	window;
 	t_map		map;
 	t_parsing	parsing;
