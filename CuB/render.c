@@ -6,7 +6,7 @@
 /*   By: mfadil <mfadil@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/19 22:29:31 by mfadil            #+#    #+#             */
-/*   Updated: 2023/10/20 23:11:00 by mfadil           ###   ########.fr       */
+/*   Updated: 2023/10/21 17:05:02 by mfadil           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,8 @@ void	update_frame(t_main *game)
 		;
 	last_ticks = (float)time_now();
 	game->delta = (float)(time_now() - last_ticks) / 1000.0f;
+	moving_character(game);
+	
 }
 
 int	rendering_cub(t_main *game)

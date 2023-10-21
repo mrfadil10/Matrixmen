@@ -6,7 +6,7 @@
 /*   By: mfadil <mfadil@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/16 14:49:49 by mfadil            #+#    #+#             */
-/*   Updated: 2023/10/20 23:53:22 by mfadil           ###   ########.fr       */
+/*   Updated: 2023/10/21 22:55:28 by mfadil           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,9 @@
 # define WIN_HEIGHT 900
 # define FPS 40
 # define SIZEOF_TILE 64
+# define CHAR_SCALE 3
+# define CHAR_WIDTH 10
+# define CHAR_HEIGHT 32
 
 enum
 {
@@ -146,6 +149,7 @@ typedef struct s_consts
 {
 	int		ray_nb;
 	float	fps;
+	float	tau;
 	float	scale;
 	float	mid_width;
 	float	mid_height;
@@ -182,8 +186,22 @@ typedef struct s_character
 	int			rots_dir;
 	int			walk_dir;
 	int			turn_dir;
+	t_axes		position;
 }	t_character;
 
+typedef struct s_rays
+{
+	float		angle;
+	float		cos_x;
+	float		sin_x;
+	float		depth;
+	float		proj_height;
+	float		vert_depth;
+	float		horz_depth;
+	float		content_x;
+	float		content_y;
+	t_axes		proj_pt;
+}
 typedef struct s_main
 {
 	void		*mlx;
@@ -204,11 +222,13 @@ typedef struct s_main
 	t_character	character;
 }	t_main;
 
-int	free_dbl_int(int **arr, size_t size);
-int	set_cub_error(t_main *game, char *message);
-int	init_cub3d(t_main *game);
-int	free_memory(t_main *game);
-int	key_hook_cub(t_main *game, int keycode);
-int	key_release(t_main *game, int keycode);
+int		free_dbl_int(int **arr, size_t size);
+int		set_cub_error(t_main *game, char *message);
+int		init_cub3d(t_main *game);
+int		free_memory(t_main *game);
+int		key_hook_cub(t_main *game, int keycode);
+int		key_release(t_main *game, int keycode);
+void	check_collision(t_main *game, float δx, float δy);
+int		moving_character(t_main *game);
 
 #endif
