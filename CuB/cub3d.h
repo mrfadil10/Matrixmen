@@ -6,7 +6,7 @@
 /*   By: mfadil <mfadil@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/16 14:49:49 by mfadil            #+#    #+#             */
-/*   Updated: 2023/10/21 22:55:28 by mfadil           ###   ########.fr       */
+/*   Updated: 2023/10/23 22:48:04 by mfadil           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@
 # define CHAR_SCALE 3
 # define CHAR_WIDTH 10
 # define CHAR_HEIGHT 32
+# define MAX_DEPTH 100
 
 enum
 {
@@ -153,6 +154,7 @@ typedef struct s_consts
 	float	scale;
 	float	mid_width;
 	float	mid_height;
+	
 }	t_consts;
 
 typedef struct s_color
@@ -187,10 +189,13 @@ typedef struct s_character
 	int			walk_dir;
 	int			turn_dir;
 	t_axes		position;
+	t_axes		map_pos;
 }	t_character;
 
 typedef struct s_rays
 {
+	int			hit_content;
+	bool		vertical_hit;
 	float		angle;
 	float		cos_x;
 	float		sin_x;
@@ -201,7 +206,10 @@ typedef struct s_rays
 	float		content_x;
 	float		content_y;
 	t_axes		proj_pt;
-}
+	t_axes		vert_pt;
+	t_axes		horz_pt;
+}	t_rays;
+
 typedef struct s_main
 {
 	void		*mlx;
@@ -220,6 +228,7 @@ typedef struct s_main
 	t_err		error;
 	clock_t		time_to_start;
 	t_character	character;
+	t_rays		*rays;
 }	t_main;
 
 int		free_dbl_int(int **arr, size_t size);
@@ -230,5 +239,6 @@ int		key_hook_cub(t_main *game, int keycode);
 int		key_release(t_main *game, int keycode);
 void	check_collision(t_main *game, float δx, float δy);
 int		moving_character(t_main *game);
+bool	check_is_wall(int c);
 
 #endif
