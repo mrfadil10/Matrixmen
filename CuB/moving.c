@@ -6,7 +6,7 @@
 /*   By: mfadil <mfadil@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/20 23:23:50 by mfadil            #+#    #+#             */
-/*   Updated: 2023/10/21 16:35:47 by mfadil           ###   ########.fr       */
+/*   Updated: 2023/10/24 17:53:12 by mfadil           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,10 @@ bool	check_is_wall(int c)
 
 bool	has_wall_at(t_main *game, float x, float y)
 {
-	if (x < 0 || y < 0 || x < game->map.width * SIZEOF_TILE
-		|| y < game->map.height * SIZEOF_TILE)
-		return (check_is_wall(game->map.array[(int)(y / SIZEOF_TILE)]
-				[(int)(x / SIZEOF_TILE)]));
+	if (x < 0 || y < 0 || x > game->map.width * SIZEOF_TILE
+		|| y > game->map.height * SIZEOF_TILE)
+		return (true);
+	return (0);
 }
 
 int	moving_character(t_main *game)
@@ -44,16 +44,16 @@ int	moving_character(t_main *game)
 	check_collision(game, diff.x, diff.y);
 	game->character.angle += (game->character.rots_dir * game->character.rots_dir) *
 		game->character.rots_dir;
-}
-
-void	check_collision(t_main *game, float δx, float δy)
-{
-	if (!has_wall_at(game, game->character.position.x + δx * CHAR_SCALE,
-			game->character.position.y))
-		game->character.position.x += δx;
-	if (!has_wall_at(game, game->character.position.x,
-			game->character.position.y + δy * CHAR_SCALE))
-		game->character.position.y += δy;
 	game->character.angle = fmod(game->character.angle, game->consts.tau);
 	return (0);
+}
+
+void	check_collision(t_main *game, float dx, float dy)
+{
+	if (!has_wall_at(game, game->character.position.x + dx * CHAR_SCALE,
+			game->character.position.y))
+		game->character.position.x += dx;
+	if (!has_wall_at(game, game->character.position.x,
+			game->character.position.y + dy * CHAR_SCALE))
+		game->character.position.y += dy;
 }

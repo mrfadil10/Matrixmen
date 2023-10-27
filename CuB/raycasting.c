@@ -6,7 +6,7 @@
 /*   By: mfadil <mfadil@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/21 17:25:01 by mfadil            #+#    #+#             */
-/*   Updated: 2023/10/23 22:48:33 by mfadil           ###   ########.fr       */
+/*   Updated: 2023/10/24 18:29:26 by mfadil           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -128,9 +128,9 @@ void	raycasting(t_main *game)
 	float	depth;
 
 	iter.i = -1;
-	game->character.position.x = (int)(game->character.position.x / SIZEOF_TILE);
-	game->character.position.y = (int)(game->character.position.y / SIZEOF_TILE);
-	angle = game->character.angle - game->character.width + 0.0001;
+	game->character.map_pos.x = (int)(game->character.position.x / SIZEOF_TILE);
+	game->character.map_pos.y = (int)(game->character.position.y / SIZEOF_TILE);
+	angle = game->character.angle - game->consts.half_fov + 0.0001;
 	while (++iter.i < WIN_WIDTH)
 	{
 		game->rays[iter.i].angle = angle;
@@ -139,8 +139,9 @@ void	raycasting(t_main *game)
 		horizon_steps(game, &distances, &depth, iter.i);
 		horizontal_inter(game, &distances, depth, iter.i);
 		vertical_steps(game, &distances, &depth, iter.i);
-		vertical_steps(game, &distances, &depth, iter.i);
+		vertical_inter(game, &distances, depth, iter.i);
 		intersection(game, iter.i);
+		drawing_walls(game, iter, angle);
 		angle += game->consts.angle_delta;
 	}
 }

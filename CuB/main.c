@@ -6,11 +6,29 @@
 /*   By: mfadil <mfadil@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/16 14:47:53 by mfadil            #+#    #+#             */
-/*   Updated: 2023/10/19 22:29:12 by mfadil           ###   ########.fr       */
+/*   Updated: 2023/10/26 15:04:08 by mfadil           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+
+void	cub_initialize(t_main *game, char *filename)
+{
+	game->window.width = WIN_WIDTH;
+	game->window.height = WIN_HEIGHT;
+	game->map.file.path = filename;
+	game->parsing.map = false;
+	game->parsing.map_is_init = false;
+	game->parsing.no = false;
+	game->parsing.so = false;
+	game->parsing.ea = false;
+	game->parsing.we = false;
+	game->parsing.floor = false;
+	game->parsing.ceiling = false;
+	game->paused = false;
+	game->freeze = false;
+	game->rays = (t_rays *)malloc(sizeof(t_rays) * game->consts.ray_nb);
+}
 
 void	error_exit(t_main *game, char *message)
 {
@@ -22,22 +40,33 @@ void	error_exit(t_main *game, char *message)
 	exit (1);
 }
 
-void	initialize(t_main *game)
+void	init_constants(t_main *game)
 {
-	game->consts.mid_width = 800;
-	game->consts.mid_height = 450;
-	game->consts.fps = 25;
-	game->consts.ray_nb = 1600;
+	game->consts.fps = 1000 / FPS;
+	game->consts.tau = 2 * M_PI;
+	game->window.width = WIN_WIDTH / 2;
+	game->window.height = WIN_HEIGHT / 2;
+	game->consts.field_of_view = 60 * (M_PI / 180);
+	game->consts.half_fov = game->consts.field_of_view / 2;
+	game->consts.screen_distance = WIN_WIDTH / 2 / tan(game->consts.half_fov);
+	game->consts.ray_nb = WIN_WIDTH;
+	game->consts.half_ray_nb = game->consts.ray_nb / 2;
+	game->consts.scale = WIN_WIDTH / game->consts.ray_nb;
+	game->consts.angle_delta = game->consts.field_of_view / game->consts.ray_nb;
+	game->consts.rotation_speed = 90 * (M_PI / 180);
 }
 
 int	main(int ac, char **av)
 {
+	(void)av;
 	t_main	game;
 
+	ft_bzero(&game, sizeof(t_main));
 	if (ac != 2)
 		error_exit(&game, "\tUsage:\t./cub3D [filename].cub");
-	initialize(&game);
-	// parsing
+	init_constants(&game);
+	
+	cub_initialize(&game, av[1]);
 	game.mlx = mlx_init();
 	game.window.reference = mlx_new_window(game.mlx, game.window.width, game.window.height, "cub3D");
 	if (init_cub3d(&game))
@@ -47,5 +76,6 @@ int	main(int ac, char **av)
 	mlx_hook(game.window.reference, ON_DESTROY, 0L, free_memory, &game);
 	mlx_hook(game.window.reference, ON_KEYDOWN, 0L, key_hook_cub, &game);
 	mlx_hook(game.window.reference, ON_KEYDOWN, 0L, key_release, &game);
-	mlx_loop_hook(game.window.reference, rendering_cub, &game);
+	mlx_loop_hook(game.mlx, rendering_cub, &game);
+	mlx_loop(game.mlx);
 }

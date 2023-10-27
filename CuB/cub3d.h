@@ -6,7 +6,7 @@
 /*   By: mfadil <mfadil@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/16 14:49:49 by mfadil            #+#    #+#             */
-/*   Updated: 2023/10/23 22:48:04 by mfadil           ###   ########.fr       */
+/*   Updated: 2023/10/27 23:41:42 by mfadil           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 # include <time.h>
 # include <mlx.h>
 # include "./libft/libft.h"
+# include "./Gnl/get_next_line.h"
 # include <unistd.h>
 # include <stdio.h>
 # include <stdlib.h>
@@ -24,6 +25,7 @@
 # include <stdbool.h>
 # include <sys/types.h>
 # include <sys/stat.h>
+# include <errno.h>
 
 # define WIN_WIDTH 1600
 # define WIN_HEIGHT 900
@@ -138,6 +140,11 @@ typedef struct s_parsing
 	bool	ea;
 	bool	we;
 	bool	floor;
+	bool	map;
+	bool	map_is_init;
+	bool	ceiling;
+	int		lines_before_map;
+	int		lowest_indent;
 }	t_parsing;
 
 typedef struct s_error
@@ -149,12 +156,17 @@ typedef struct s_error
 typedef struct s_consts
 {
 	int		ray_nb;
+	float	half_ray_nb;
+	float	field_of_view;
+	float	half_fov;
 	float	fps;
 	float	tau;
 	float	scale;
 	float	mid_width;
 	float	mid_height;
-	
+	float	angle_delta;
+	float	screen_distance;
+	float	rotation_speed;
 }	t_consts;
 
 typedef struct s_color
@@ -166,6 +178,8 @@ typedef struct s_color
 
 typedef struct s_assets
 {
+	t_color	floor;
+	t_color	ceiling;
 	char	*north;
 	char	*south;
 	char	*east;
@@ -210,6 +224,23 @@ typedef struct s_rays
 	t_axes		horz_pt;
 }	t_rays;
 
+typedef struct s_draw_walls
+{
+	int			i;
+	int			wall_top_pixel;
+	int			wall_bottom_pixel;
+	float		depth;
+}	t_draw_walls;
+
+typedef struct s_init_map
+{
+	int		width;
+	int		height;
+	int		lowest_indent;
+	char	*quick_line;
+	t_iter	iter;
+}	t_init_map;
+
 typedef struct s_main
 {
 	void		*mlx;
@@ -232,6 +263,7 @@ typedef struct s_main
 }	t_main;
 
 int		free_dbl_int(int **arr, size_t size);
+int		free_dbl_ptr(void **tab);
 int		set_cub_error(t_main *game, char *message);
 int		init_cub3d(t_main *game);
 int		free_memory(t_main *game);
@@ -240,5 +272,19 @@ int		key_release(t_main *game, int keycode);
 void	check_collision(t_main *game, float δx, float δy);
 int		moving_character(t_main *game);
 bool	check_is_wall(int c);
+void	raycasting(t_main *game);
+int		rendering_cub(t_main *game);
+void	drawing_walls(t_main *game, t_iter iter, float ray_angle);
+void	put_pixel(t_main *game, int color, float x, float y);
+
+// parsing
+
+void	cub_initialize(t_main *game, char *filename);
+int		error_setter(t_main *game, char *error);
+int		check_extension(t_main *game);
+int		free_cub3d(void *ptr);
+int		check_is_open(t_main *game, char *filename, int *fd);
+int		ft_occurences_counting(char *str, char c);
+bool	is_line_empty(char *line);
 
 #endif
