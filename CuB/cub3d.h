@@ -6,7 +6,7 @@
 /*   By: mfadil <mfadil@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/16 14:49:49 by mfadil            #+#    #+#             */
-/*   Updated: 2023/10/27 23:41:42 by mfadil           ###   ########.fr       */
+/*   Updated: 2023/10/29 00:47:41 by mfadil           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,11 @@ enum
 	ON_KEYDOWN = 2,
 	ON_KEYUP = 3,
 	ON_DESTROY = 17,
+};
+
+enum
+{
+	CHARACTER = 99;
 };
 
 typedef struct s_iter
@@ -279,6 +284,7 @@ void	put_pixel(t_main *game, int color, float x, float y);
 
 // parsing
 
+int		parse_config(t_main *game);
 void	cub_initialize(t_main *game, char *filename);
 int		error_setter(t_main *game, char *error);
 int		check_extension(t_main *game);
@@ -286,5 +292,8 @@ int		free_cub3d(void *ptr);
 int		check_is_open(t_main *game, char *filename, int *fd);
 int		ft_occurences_counting(char *str, char c);
 bool	is_line_empty(char *line);
+int		map_parsing(t_main *game, char *line);
+int		parse_lineof_file(t_main *game, char *line);
+
 
 #endif

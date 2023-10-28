@@ -6,7 +6,7 @@
 /*   By: mfadil <mfadil@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/27 15:13:32 by mfadil            #+#    #+#             */
-/*   Updated: 2023/10/27 21:52:53 by mfadil           ###   ########.fr       */
+/*   Updated: 2023/10/29 00:29:00 by mfadil           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -138,7 +138,7 @@ int	parse_lineof_file(t_main *game, char *line)
 	char	**split;
 
 	if (game->parsing.map)
-		return (parse_map(game, line));
+		return (map_parsing(game, line));
 	line[ft_strlen(line) - 1] = 0;
 	split = ft_split(line, " \t\n");
 	if (!split)

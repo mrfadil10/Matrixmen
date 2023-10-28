@@ -6,7 +6,7 @@
 /*   By: mfadil <mfadil@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/27 11:11:26 by mfadil            #+#    #+#             */
-/*   Updated: 2023/10/27 15:12:51 by mfadil           ###   ########.fr       */
+/*   Updated: 2023/10/29 00:46:45 by mfadil           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,6 +93,9 @@ int	parse_config(t_main *game)
 			continue ;
 		}
 		check_map(game, line);
-		if ()
+		if (parse_lineof_file(game, line))
+			return (free_cub3d(line), 1);
+		free_cub3d(line);
 	}
+	return (0);
 }

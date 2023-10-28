@@ -6,7 +6,7 @@
 /*   By: mfadil <mfadil@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/27 10:48:25 by mfadil            #+#    #+#             */
-/*   Updated: 2023/10/27 11:46:04 by mfadil           ###   ########.fr       */
+/*   Updated: 2023/10/29 00:51:31 by mfadil           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,12 +45,17 @@ int	parsing_file(t_main *game)
 {
 	if (check_is_exist(game))
 		return (1);
+	if (parse_config(game))
+		return (1);
 	if (check_extension(game))
 		return (1);
+	return (0);
 }
 
-void	ft_parser(t_main *game, char *filename)
+int	ft_parser(t_main *game, char *filename)
 {
 	cub_initialize(game, filename);
-
+	if (parsing_file(game))
+		return (1);
+	if (clos)
 }
