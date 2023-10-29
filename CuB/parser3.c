@@ -6,7 +6,7 @@
 /*   By: mfadil <mfadil@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/27 15:13:32 by mfadil            #+#    #+#             */
-/*   Updated: 2023/10/29 00:29:00 by mfadil           ###   ########.fr       */
+/*   Updated: 2023/10/29 15:24:58 by mfadil           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,9 +26,10 @@ static int	color_joiner(t_main *game, t_parse_color *str, char **line)
 	str->join = ft_strdup("");
 	if (!str->join)
 		return (error_setter(game, "error malloc"));
-	str->iter.i = 0;
-	while (line[str->iter.i])
+	str->iter.i = -1;
+	while (line[++str->iter.i])
 	{
+		printf("line[0] = %s\n", line[0]);
 		if (str->iter.i == 0)
 			continue ;
 		else
@@ -37,7 +38,6 @@ static int	color_joiner(t_main *game, t_parse_color *str, char **line)
 			str->join = ft_strjoin(str->join, line[str->iter.i]);
 			free(str->temp);
 		}
-		str->iter.i++;
 	}
 	if (ft_occurences_counting(str->join, ',') != 2)
 		return (error_setter(game, "Error: Invalid color"));
@@ -71,8 +71,9 @@ static int	color_helper(t_main *game, t_parse_color *str)
 				return (error_setter(game, "Error: Invalid color"), free_dbl_ptr((void **)str->rgb));
 			str->iter.j++;
 		}
-		return (0);
+		str->iter.i++;
 	}
+	return (0);
 }
 
 int	parse_colors(t_main *game, t_color *rgb, char **arr, bool *is_colored)
@@ -83,6 +84,7 @@ int	parse_colors(t_main *game, t_color *rgb, char **arr, bool *is_colored)
 		return (error_setter(game, "Error: Duplicate identifier"));
 	if (color_joiner(game, &str, arr))
 		return (1);
+	printf("arr[1] = %s\n", arr[1]);
 	if (color_helper(game, &str))
 		return (1);
 	rgb->r = ft_atoi(str.rgb[0]);
@@ -100,7 +102,7 @@ int	parse_textures(t_main *game, char **dup, char **line, bool *is_tex)
 {
 	int	fd;
 
-	if (*is_tex == false)
+	if (*is_tex == true)
 		return (error_setter(game, "Error: Duplicate identifier"));
 	fd = -1;
 	while (line[++fd])
@@ -118,13 +120,13 @@ int	parse_textures(t_main *game, char **dup, char **line, bool *is_tex)
 int	identify_file_lines(t_main *game, char **arr)
 {
 	if (ft_strncmp(arr[0], "NO", 3) == 0)
-		return (parse_texture(game, &game->assets.north, arr, &game->parsing.no));
+		return (parse_textures(game, &game->assets.north, arr, &game->parsing.no));
 	else if (ft_strncmp(arr[0], "SO", 3) == 0)
-		return (parse_texture(game, &game->assets.south, arr, &game->parsing.so));
+		return (parse_textures(game, &game->assets.south, arr, &game->parsing.so));
 	else if (ft_strncmp(arr[0], "EA", 3) == 0)
-		return (parse_texture(game, &game->assets.east, arr, &game->parsing.ea));
+		return (parse_textures(game, &game->assets.east, arr, &game->parsing.ea));
 	else if (ft_strncmp(arr[0], "WE", 3) == 0)
-		return (parse_texture(game, &game->assets.west, arr, &game->parsing.we));
+		return (parse_textures(game, &game->assets.west, arr, &game->parsing.we));
 	else if (ft_strncmp(arr[0], "F", 2) == 0)
 		return (parse_colors(game, &game->assets.floor, arr, &game->parsing.floor));
 	else if (ft_strncmp(arr[0], "C", 2) == 0)
@@ -143,6 +145,7 @@ int	parse_lineof_file(t_main *game, char *line)
 	split = ft_split(line, " \t\n");
 	if (!split)
 		return (error_setter(game, "error malloc"));
+	printf("split[0] = %s\n", split[0]);
 	if (identify_file_lines(game, split))
 		return (free_dbl_ptr((void **)split), 1);
 	free_dbl_ptr((void **)split);

@@ -6,7 +6,7 @@
 /*   By: mfadil <mfadil@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/08 12:42:13 by mfadil            #+#    #+#             */
-/*   Updated: 2022/10/22 23:04:21 by mfadil           ###   ########.fr       */
+/*   Updated: 2023/10/29 14:38:54 by mfadil           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@ unsigned int	ft_strlcpy(char *dest, char *src, unsigned int size);
 char			*ft_strmapi(char const *s, char (*f)(unsigned int, char));
 char			*ft_itoa(int n);
 char			*ft_substr(char const *s, unsigned int start, size_t len);
-char			**ft_split(char const *s, char c);
+//char			**ft_split(char const *s, char *c);
+char	**ft_split(char const *s, char const *charset);
 
 #endif

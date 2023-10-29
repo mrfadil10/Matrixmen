@@ -6,7 +6,7 @@
 /*   By: mfadil <mfadil@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/16 14:49:49 by mfadil            #+#    #+#             */
-/*   Updated: 2023/10/29 00:47:41 by mfadil           ###   ########.fr       */
+/*   Updated: 2023/10/29 13:28:44 by mfadil           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ enum
 
 enum
 {
-	CHARACTER = 99;
+	CHARACTER = 99,
 };
 
 typedef struct s_iter
@@ -291,9 +291,12 @@ int		check_extension(t_main *game);
 int		free_cub3d(void *ptr);
 int		check_is_open(t_main *game, char *filename, int *fd);
 int		ft_occurences_counting(char *str, char c);
+int		ft_int_occurences_counting(int *str, int c, size_t size);
+int		ft_check_occurs(t_main *game);
 bool	is_line_empty(char *line);
 int		map_parsing(t_main *game, char *line);
 int		parse_lineof_file(t_main *game, char *line);
-
+int		check_borders(t_main *game);
+int		ft_parser(t_main *game, char *filename);
 
 #endif

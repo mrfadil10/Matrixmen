@@ -6,7 +6,7 @@
 #    By: mfadil <mfadil@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/23 13:33:36 by mfadil            #+#    #+#              #
-#    Updated: 2023/10/27 12:05:57 by mfadil           ###   ########.fr        #
+#    Updated: 2023/10/29 12:05:24 by mfadil           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,6 +30,11 @@ SRC =	cub_hooks.c \
 		render.c \
 		utils1.c \
 		draw_walls.c \
+		parse_map.c \
+		parse_utils.c \
+		parser.c \
+		parser2.c \
+		parser3.c \
 
 OBJ_DIR = Objects
 

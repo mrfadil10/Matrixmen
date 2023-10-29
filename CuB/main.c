@@ -6,11 +6,21 @@
 /*   By: mfadil <mfadil@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/16 14:47:53 by mfadil            #+#    #+#             */
-/*   Updated: 2023/10/26 15:04:08 by mfadil           ###   ########.fr       */
+/*   Updated: 2023/10/29 14:02:12 by mfadil           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+
+void	error_exit(t_main *game, char *message)
+{
+	ft_putstr_fd("Error\n", 2);
+	ft_putstr_fd(message, 2);
+	ft_putstr_fd("\n", 2);
+	if (game->allocs.map)
+		free_dbl_int(game->map.array, (size_t) game->window.height);
+	exit (1);
+}
 
 void	cub_initialize(t_main *game, char *filename)
 {
@@ -28,24 +38,16 @@ void	cub_initialize(t_main *game, char *filename)
 	game->paused = false;
 	game->freeze = false;
 	game->rays = (t_rays *)malloc(sizeof(t_rays) * game->consts.ray_nb);
-}
-
-void	error_exit(t_main *game, char *message)
-{
-	ft_putstr_fd("Error\n", 2);
-	ft_putstr_fd(message, 2);
-	ft_putstr_fd("\n", 2);
-	if (game->allocs.map)
-		free_dbl_int(game->map.array, (size_t) game->window.height);
-	exit (1);
+	if (!game->rays)
+		error_exit(game, "Malloc failed");
 }
 
 void	init_constants(t_main *game)
 {
 	game->consts.fps = 1000 / FPS;
 	game->consts.tau = 2 * M_PI;
-	game->window.width = WIN_WIDTH / 2;
-	game->window.height = WIN_HEIGHT / 2;
+	game->consts.mid_width = WIN_WIDTH / 2;
+	game->consts.mid_height = WIN_HEIGHT / 2;
 	game->consts.field_of_view = 60 * (M_PI / 180);
 	game->consts.half_fov = game->consts.field_of_view / 2;
 	game->consts.screen_distance = WIN_WIDTH / 2 / tan(game->consts.half_fov);
@@ -58,15 +60,14 @@ void	init_constants(t_main *game)
 
 int	main(int ac, char **av)
 {
-	(void)av;
 	t_main	game;
 
 	ft_bzero(&game, sizeof(t_main));
 	if (ac != 2)
 		error_exit(&game, "\tUsage:\t./cub3D [filename].cub");
 	init_constants(&game);
-	
-	cub_initialize(&game, av[1]);
+	if (ft_parser(&game, av[1]))
+		error_exit(&game, game.error.message);
 	game.mlx = mlx_init();
 	game.window.reference = mlx_new_window(game.mlx, game.window.width, game.window.height, "cub3D");
 	if (init_cub3d(&game))

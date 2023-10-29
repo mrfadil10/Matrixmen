@@ -6,7 +6,7 @@
 /*   By: mfadil <mfadil@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/27 11:11:26 by mfadil            #+#    #+#             */
-/*   Updated: 2023/10/29 00:46:45 by mfadil           ###   ########.fr       */
+/*   Updated: 2023/10/29 14:47:24 by mfadil           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,10 +25,39 @@ int	ft_occurences_counting(char *str, char c)
 	return (count);
 }
 
+int	ft_int_occurences_counting(int *str, int c, size_t size)
+{
+	int	i;
+	int	count;
+
+	i = 0;
+	count = 0;
+	while ((size_t)i < size)
+		if (str[i++] == c)
+			count++;
+	return (count);
+}
+
+int	ft_check_occurs(t_main *game)
+{
+	int	i;
+	int	occurs;
+
+	i = 0;
+	occurs = 0;
+	while (i < game->map.height)
+		occurs += ft_int_occurences_counting(game->map.array[i++], PLAYER, game->map.width);
+	if (!occurs)
+		return (error_setter(game, "Error: No player"));
+	else if (occurs > 1)
+		return (error_setter(game, "Error: Too many players"));
+	return (0);
+}
+
 int	check_extension(t_main *game)
 {
 	int		i;
-	char	*extension;
+	char	**extension;
 
 	i = ft_occurences_counting(game->map.file.path, '.');
 	if (!i)
@@ -79,9 +108,10 @@ int	parse_config(t_main *game)
 {
 	char *line;
 
-	while (1)
+	while (true)
 	{
 		line = get_next_line(game->map.file.fd);
+		printf("-->%s\n", line);
 		if (!line)
 			break ;
 		if (is_line_empty(line))
@@ -95,7 +125,7 @@ int	parse_config(t_main *game)
 		check_map(game, line);
 		if (parse_lineof_file(game, line))
 			return (free_cub3d(line), 1);
-		free_cub3d(line);
+		free(line);
 	}
 	return (0);
 }

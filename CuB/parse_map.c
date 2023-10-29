@@ -6,7 +6,7 @@
 /*   By: mfadil <mfadil@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/27 21:53:28 by mfadil            #+#    #+#             */
-/*   Updated: 2023/10/29 00:29:17 by mfadil           ###   ########.fr       */
+/*   Updated: 2023/10/29 22:55:46 by mfadil           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,7 +97,7 @@ static void	map_setting_helper(t_main *game, float degre, int i, int j)
 	game->character.mov_speed = 250;
 	game->character.rots_speed = game->consts.rotation_speed; // to check
 	game->character.angle = degre;
-	game->map.array[i][j] = 0;
+	game->map.array[i][j] = CHARACTER;
 }
 
 static int	map_parsing_helper(t_main *game, t_parse_map *struc, char *line, int i)
@@ -113,7 +113,7 @@ static int	map_parsing_helper(t_main *game, t_parse_map *struc, char *line, int 
 	else if (line[struc->k] >= '0' && line[struc->k] <= '5')
 		game->map.array[i][struc->j] = line[struc->k] - '0';
 	else if (line[struc->k] == ' ')
-		game->map.array[i][struc->j] = 0;
+		game->map.array[i][struc->j] = -1;
 	else
 		return (error_setter(game, "Error: Invalid character"));
 	struc->k++;// to check
@@ -138,8 +138,10 @@ int	map_parsing(t_main *game, char *line)
 	while (++struc.j < game->map.width)
 	{
 		if (line[struc.k] && line[struc.k] != '\n')
+		{
 			if (map_parsing_helper(game, &struc, line, i))
 				return (1);
+		}
 		else
 			game->map.array[i][struc.j] = 0;
 	}
