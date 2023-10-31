@@ -6,7 +6,7 @@
 /*   By: mfadil <mfadil@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/27 21:53:28 by mfadil            #+#    #+#             */
-/*   Updated: 2023/10/29 22:55:46 by mfadil           ###   ########.fr       */
+/*   Updated: 2023/10/30 23:29:48 by mfadil           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,7 +97,7 @@ static void	map_setting_helper(t_main *game, float degre, int i, int j)
 	game->character.mov_speed = 250;
 	game->character.rots_speed = game->consts.rotation_speed; // to check
 	game->character.angle = degre;
-	game->map.array[i][j] = CHARACTER;
+	game->map.array[i][j] = PLAYER;
 }
 
 static int	map_parsing_helper(t_main *game, t_parse_map *struc, char *line, int i)
@@ -128,7 +128,7 @@ int	map_parsing(t_main *game, char *line)
 	if (!game->parsing.map_is_init)
 		if (initialize_map(game))
 			return (1);
-	if (i >= game->map.height)
+	if (i >= game->map.height + 1)
 		return (error_setter(game, "Error: index out of range"));
 	game->map.array[i] = (int *)malloc(sizeof(int) * game->map.width);
 	if (!game->map.array[i])
@@ -143,7 +143,7 @@ int	map_parsing(t_main *game, char *line)
 				return (1);
 		}
 		else
-			game->map.array[i][struc.j] = 0;
+			game->map.array[i][struc.j] = -1;
 	}
 	i++;
 	return (0);

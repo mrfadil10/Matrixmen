@@ -6,7 +6,7 @@
 /*   By: mfadil <mfadil@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/19 17:37:07 by mfadil            #+#    #+#             */
-/*   Updated: 2023/10/26 16:01:47 by mfadil           ###   ########.fr       */
+/*   Updated: 2023/10/31 15:27:14 by mfadil           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,10 +34,7 @@ int	key_hook_cub(t_main *game, int keycode)
 int	key_release(t_main *game, int keycode)
 {
 	if (keycode == KEY_W)
-	{
-		printf("keycode: %d\n", keycode);
 		game->character.walk_dir = 0;
-	}
 	else if (keycode == KEY_S)
 		game->character.walk_dir = 0;
 	else if (keycode == KEY_D)

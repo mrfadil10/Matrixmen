@@ -6,7 +6,7 @@
 /*   By: mfadil <mfadil@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/20 23:23:50 by mfadil            #+#    #+#             */
-/*   Updated: 2023/10/24 17:53:12 by mfadil           ###   ########.fr       */
+/*   Updated: 2023/10/30 23:18:44 by mfadil           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,8 @@ bool	has_wall_at(t_main *game, float x, float y)
 	if (x < 0 || y < 0 || x > game->map.width * SIZEOF_TILE
 		|| y > game->map.height * SIZEOF_TILE)
 		return (true);
-	return (0);
+	return (check_is_wall(game->map.array[(int)(y / SIZEOF_TILE)]
+			[(int)(x / SIZEOF_TILE)]));
 }
 
 int	moving_character(t_main *game)

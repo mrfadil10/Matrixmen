@@ -6,7 +6,7 @@
 /*   By: mfadil <mfadil@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/27 10:48:25 by mfadil            #+#    #+#             */
-/*   Updated: 2023/10/29 17:30:22 by mfadil           ###   ########.fr       */
+/*   Updated: 2023/10/30 21:29:45 by mfadil           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,6 @@ int	ft_parser(t_main *game, char *filename)
 	if (close(game->map.file.fd) == -1)
 		return (error_setter(game, "Error: could not close file"));
 	printf("parsing_file\n");
-	printf("game->map.array = %d\n", game->map.array[0][0]);
 	if (check_borders(game))
 		return (1);
 	if (ft_check_occurs(game))

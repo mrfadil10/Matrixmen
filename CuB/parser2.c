@@ -6,7 +6,7 @@
 /*   By: mfadil <mfadil@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/27 11:11:26 by mfadil            #+#    #+#             */
-/*   Updated: 2023/10/29 14:47:24 by mfadil           ###   ########.fr       */
+/*   Updated: 2023/10/30 23:26:35 by mfadil           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,10 +43,10 @@ int	ft_check_occurs(t_main *game)
 	int	i;
 	int	occurs;
 
-	i = 0;
+	i = -1;
 	occurs = 0;
-	while (i < game->map.height)
-		occurs += ft_int_occurences_counting(game->map.array[i++], PLAYER, game->map.width);
+	while (++i < game->map.height)
+		occurs += ft_int_occurences_counting(game->map.array[i], PLAYER, game->map.width);
 	if (!occurs)
 		return (error_setter(game, "Error: No player"));
 	else if (occurs > 1)

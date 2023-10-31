@@ -6,7 +6,7 @@
 /*   By: mfadil <mfadil@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/16 14:49:49 by mfadil            #+#    #+#             */
-/*   Updated: 2023/10/29 13:28:44 by mfadil           ###   ########.fr       */
+/*   Updated: 2023/10/30 23:27:38 by mfadil           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,11 +76,6 @@ enum
 	ON_KEYDOWN = 2,
 	ON_KEYUP = 3,
 	ON_DESTROY = 17,
-};
-
-enum
-{
-	CHARACTER = 99,
 };
 
 typedef struct s_iter

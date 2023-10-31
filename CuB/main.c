@@ -6,7 +6,7 @@
 /*   By: mfadil <mfadil@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/16 14:47:53 by mfadil            #+#    #+#             */
-/*   Updated: 2023/10/29 14:02:12 by mfadil           ###   ########.fr       */
+/*   Updated: 2023/10/31 15:49:04 by mfadil           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ int	main(int ac, char **av)
 	game.time_to_start = clock();
 	mlx_hook(game.window.reference, ON_DESTROY, 0L, free_memory, &game);
 	mlx_hook(game.window.reference, ON_KEYDOWN, 0L, key_hook_cub, &game);
-	mlx_hook(game.window.reference, ON_KEYDOWN, 0L, key_release, &game);
+	mlx_hook(game.window.reference, ON_KEYUP, 0L, key_release, &game);
 	mlx_loop_hook(game.mlx, rendering_cub, &game);
 	mlx_loop(game.mlx);
 }
