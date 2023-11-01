@@ -6,7 +6,7 @@
 /*   By: mfadil <mfadil@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/24 16:56:35 by mfadil            #+#    #+#             */
-/*   Updated: 2023/10/24 17:45:15 by mfadil           ###   ########.fr       */
+/*   Updated: 2023/11/01 17:32:19 by mfadil           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,25 +20,25 @@ unsigned int	get_textcolor(t_main *game, int txt, t_iter text_off)
 	return (((unsigned int *) game->texture[txt].addr)[ind]);
 }
 
-void	put_stripe(t_main *game, t_iter text_off, t_iter iter, int i)
+void	put_stripes(t_main *game, t_iter text_off, t_iter iter, int i)
 {
-	unsigned int	text_color;
+	unsigned int	colored_txt = 0;
 
 	if (game->rays[iter.i].vertical_hit)
 	{
 		if (game->rays[iter.i].horz_pt.x > game->character.position.x)
-			text_color = get_textcolor(game, TXT_EA, text_off);
+			colored_txt = get_textcolor(game, TXT_EA, text_off);
 		else
-			text_color = get_textcolor(game, TXT_WE, text_off);
+			colored_txt = get_textcolor(game, TXT_WE, text_off);
 	}
 	else
 	{
 		if (game->rays[iter.i].vert_pt.y > game->character.position.y)
-			text_color = get_textcolor(game, TXT_SO, text_off);
+			colored_txt = get_textcolor(game, TXT_SO, text_off);
 		else
-			text_color = get_textcolor(game, TXT_NO, text_off);
+			colored_txt = get_textcolor(game, TXT_NO, text_off);
 	}
-	put_pixel(game, text_color, iter.i * game->consts.scale, i);
+	put_pixel(game, colored_txt, iter.i * game->consts.scale, i);
 }
 
 void	drawing_stripe(t_main *game, t_iter iter, int top_wall, int wall_bottom)
@@ -51,13 +51,15 @@ void	drawing_stripe(t_main *game, t_iter iter, int top_wall, int wall_bottom)
 		text_offset.j = (int)game->rays[iter.i].vert_pt.y;
 	else
 		text_offset.j = (int)game->rays[iter.i].horz_pt.x;
-	d = SIZEOF_TILE / game->rays[iter.i].depth;
+	d = SIZEOF_TILE / game->rays[iter.i].proj_height;
 	i = top_wall;
 	while (i < wall_bottom)
 	{
 		text_offset.i = (i + (int)game->rays[iter.i].proj_height / 2
 				- game->consts.mid_height) * d;
-
+		printf("1--->i = %d\n", text_offset.i);
+		put_stripes(game, text_offset, iter, i);
+		i++;
 	}
 }
 
@@ -86,7 +88,7 @@ void	drawing_walls(t_main *game, t_iter iter, float ray_angle)
 {
 	t_draw_walls	str;
 
-	str.depth = game->rays[iter.i].depth * cos(game->character.angle - ray_angle);
+	str.depth = game->rays[iter.i].depth * (float) cos(game->character.angle - ray_angle);
 	game->rays[iter.i].proj_height = (SIZEOF_TILE / str.depth) * game->consts.screen_distance;
 	str.wall_top_pixel = game->consts.mid_height - (int) game->rays[iter.i].proj_height / 2;
 	if (str.wall_top_pixel < 0)
@@ -97,6 +99,7 @@ void	drawing_walls(t_main *game, t_iter iter, float ray_angle)
 	str.i = -1;
 	while (++str.i < str.wall_top_pixel)
 		put_pixel(game, create_rgb(game->assets.ceiling), iter.i * game->consts.scale, str.i);
+	printf("iter.i = %d\n", iter.i);
 	drawing_stripe(game, iter, str.wall_top_pixel, str.wall_bottom_pixel);
 	str.i = str.wall_bottom_pixel - 1;
 	while (++str.i < WIN_HEIGHT)
