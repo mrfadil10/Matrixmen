@@ -6,7 +6,7 @@
 /*   By: mfadil <mfadil@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/27 11:11:26 by mfadil            #+#    #+#             */
-/*   Updated: 2023/10/30 23:26:35 by mfadil           ###   ########.fr       */
+/*   Updated: 2023/11/03 12:20:19 by mfadil           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,9 +81,9 @@ bool	is_line_empty(char *line)
 {
 	int	i;
 
-	i = -1;
-	while ((line[i] >= 9 && line[i] <= 13) || line[++i] == ' ')
-		;
+	i = 0;
+	while ((line[i] >= 9 && line[i] <= 13) || line[i] == ' ')
+		i++;
 	if (line[i] == '\0' || line[i] == '\n')
 		return (true);
 	return (false);

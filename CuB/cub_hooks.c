@@ -6,13 +6,13 @@
 /*   By: mfadil <mfadil@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/19 17:37:07 by mfadil            #+#    #+#             */
-/*   Updated: 2023/10/31 15:27:14 by mfadil           ###   ########.fr       */
+/*   Updated: 2023/11/03 14:12:46 by mfadil           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-int	key_hook_cub(t_main *game, int keycode)
+int	key_hook_cub(int keycode, t_main *game)
 {
 	if (keycode == KEY_W)
 		game->character.walk_dir = -1;
@@ -23,15 +23,15 @@ int	key_hook_cub(t_main *game, int keycode)
 	else if (keycode == KEY_A)
 		game->character.turn_dir = -1;
 	else if (keycode == RIGHT_ARR)
-		game->character.rots_dir = 1;
+		game->character.rots_dir = 0.3;
 	else if (keycode == LEFT_ARR)
-		game->character.rots_dir = -1;
+		game->character.rots_dir = -0.3;
 	if (keycode == ESC)
 		free_memory(game);
 	return (0);
 }
 
-int	key_release(t_main *game, int keycode)
+int	key_release(int keycode, t_main *game)
 {
 	if (keycode == KEY_W)
 		game->character.walk_dir = 0;

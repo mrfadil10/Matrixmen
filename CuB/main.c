@@ -6,7 +6,7 @@
 /*   By: mfadil <mfadil@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/16 14:47:53 by mfadil            #+#    #+#             */
-/*   Updated: 2023/10/31 23:00:13 by mfadil           ###   ########.fr       */
+/*   Updated: 2023/11/03 16:27:42 by mfadil           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,7 @@ void	init_constants(t_main *game)
 	game->consts.rotation_speed = 90 * (M_PI / 180);
 }
 
+
 int	main(int ac, char **av)
 {
 	t_main	game;
@@ -74,8 +75,8 @@ int	main(int ac, char **av)
 		error_exit(&game, game.error.message);
 	srand((unsigned int) time(NULL));
 	game.time_to_start = clock();
-	mlx_hook(game.window.reference, ON_DESTROY, 0L, free_memory, &game);
 	mlx_hook(game.window.reference, ON_KEYDOWN, 0L, key_hook_cub, &game);
+	mlx_hook(game.window.reference, ON_DESTROY, 0L, free_memory, &game);
 	mlx_hook(game.window.reference, ON_KEYUP, 0L, key_release, &game);
 	mlx_loop_hook(game.mlx, rendering_cub, &game);
 	mlx_loop(game.mlx);

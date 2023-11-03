@@ -6,7 +6,7 @@
 /*   By: mfadil <mfadil@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/24 16:56:35 by mfadil            #+#    #+#             */
-/*   Updated: 2023/11/01 17:32:19 by mfadil           ###   ########.fr       */
+/*   Updated: 2023/11/02 15:16:11 by mfadil           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ void	drawing_stripe(t_main *game, t_iter iter, int top_wall, int wall_bottom)
 	{
 		text_offset.i = (i + (int)game->rays[iter.i].proj_height / 2
 				- game->consts.mid_height) * d;
-		printf("1--->i = %d\n", text_offset.i);
+		//printf("1--->i = %d\n", text_offset.i);
 		put_stripes(game, text_offset, iter, i);
 		i++;
 	}
@@ -99,7 +99,7 @@ void	drawing_walls(t_main *game, t_iter iter, float ray_angle)
 	str.i = -1;
 	while (++str.i < str.wall_top_pixel)
 		put_pixel(game, create_rgb(game->assets.ceiling), iter.i * game->consts.scale, str.i);
-	printf("iter.i = %d\n", iter.i);
+	//printf("iter.i = %d\n", iter.i);
 	drawing_stripe(game, iter, str.wall_top_pixel, str.wall_bottom_pixel);
 	str.i = str.wall_bottom_pixel - 1;
 	while (++str.i < WIN_HEIGHT)

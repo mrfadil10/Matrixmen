@@ -6,7 +6,7 @@
 #    By: mfadil <mfadil@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/23 13:33:36 by mfadil            #+#    #+#              #
-#    Updated: 2023/10/29 12:05:24 by mfadil           ###   ########.fr        #
+#    Updated: 2023/11/03 12:20:49 by mfadil           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@ NAME = cub
 
 CC = cc
 
-FLAGS = -Wall -Wextra -Werror
+FLAGS = -Wall -Wextra -Werror 
 
 EXFLAGS = -lmlx -framework OpenGL -framework AppKit
 

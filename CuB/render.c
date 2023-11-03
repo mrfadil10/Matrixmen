@@ -6,7 +6,7 @@
 /*   By: mfadil <mfadil@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/19 22:29:31 by mfadil            #+#    #+#             */
-/*   Updated: 2023/10/31 17:07:53 by mfadil           ###   ########.fr       */
+/*   Updated: 2023/11/03 12:27:08 by mfadil           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ int	rendering_cub(t_main *game)
 		game->time_to_start = clock();
 		frames = 0;
 	}
-	puts("rendering");
+	//puts("rendering");
 	update_frame(game);
 	mlx_put_image_to_window(game->mlx, game->window.reference, game->frame.ref, 0, 0);
 	mlx_destroy_image(game->mlx, game->frame.ref);

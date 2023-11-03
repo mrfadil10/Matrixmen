@@ -6,7 +6,7 @@
 /*   By: mfadil <mfadil@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/16 14:49:49 by mfadil            #+#    #+#             */
-/*   Updated: 2023/10/30 23:27:38 by mfadil           ###   ########.fr       */
+/*   Updated: 2023/11/03 14:12:01 by mfadil           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,8 +59,8 @@ enum
 
 enum
 {
-	RIGHT_ARR = 1,
-	LEFT_ARR = 2,
+	RIGHT_ARR = 124,
+	LEFT_ARR = 123,
 };
 
 enum
@@ -199,7 +199,7 @@ typedef struct s_character
 	float		angle;
 	float		mov_speed;
 	float		rots_speed;
-	int			rots_dir;
+	float			rots_dir;
 	int			walk_dir;
 	int			turn_dir;
 	t_axes		position;
@@ -267,8 +267,8 @@ int		free_dbl_ptr(void **tab);
 int		set_cub_error(t_main *game, char *message);
 int		init_cub3d(t_main *game);
 int		free_memory(t_main *game);
-int		key_hook_cub(t_main *game, int keycode);
-int		key_release(t_main *game, int keycode);
+int		key_hook_cub(int keycode, t_main *game);
+int		key_release(int keycode, t_main *game);
 void	check_collision(t_main *game, float δx, float δy);
 int		moving_character(t_main *game);
 bool	check_is_wall(int c);

@@ -1,14 +1,14 @@
 
-  SO	./assets/south.xpm
+  SO	./assets/0.xpm
 
-     NO          ./assets/south.xpm
+     NO          ./assets/0.xpm
 
- WE ./assets/south.xpm
-
-
+ WE ./assets/0.xpm
 
 
- EA ./assets/south.xpm
+
+
+ EA ./assets/0.xpm
 
    F     30  ,  30  ,  30
 
