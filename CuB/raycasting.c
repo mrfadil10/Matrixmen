@@ -6,7 +6,7 @@
 /*   By: mfadil <mfadil@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/21 17:25:01 by mfadil            #+#    #+#             */
-/*   Updated: 2023/11/03 22:42:43 by mfadil           ###   ########.fr       */
+/*   Updated: 2023/11/03 23:29:30 by mfadil           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,6 +124,7 @@ void	steps_and_intersection(t_main *game, int i)
 {
 	t_axes	distances;
 	float	depth;
+
 	horizon_steps(game, &distances, &depth, i);
 	horizontal_inter(game, &distances, depth, i);
 	vertical_steps(game, &distances, &depth, i);
@@ -133,9 +134,7 @@ void	steps_and_intersection(t_main *game, int i)
 void	raycasting(t_main *game)
 {
 	t_iter	iter;
-	//t_axes	distances;
 	float	angle;
-	//float	depth;
 
 	iter.i = 0;
 	game->character.map_pos.x = (int)(game->character.position.x / SIZEOF_TILE);
@@ -146,11 +145,6 @@ void	raycasting(t_main *game)
 		game->rays[iter.i].angle = angle;
 		game->rays[iter.i].cos_x = cos(angle);
 		game->rays[iter.i].sin_x = sin(angle);
-		//horizon_steps(game, &distances, &depth, iter.i);
-		//horizontal_inter(game, &distances, depth, iter.i);
-		//vertical_steps(game, &distances, &depth, iter.i);
-		//vertical_inter(game, &distances, depth, iter.i);
-		//intersection(game, iter.i);
 		steps_and_intersection(game, iter.i);
 		drawing_walls(game, iter, angle);
 		angle += game->consts.angle_delta;
