@@ -6,7 +6,7 @@
 /*   By: mfadil <mfadil@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/16 14:49:49 by mfadil            #+#    #+#             */
-/*   Updated: 2023/11/03 14:12:01 by mfadil           ###   ########.fr       */
+/*   Updated: 2023/11/03 17:55:31 by mfadil           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,9 +27,9 @@
 # include <sys/stat.h>
 # include <errno.h>
 
-# define WIN_WIDTH 1600
-# define WIN_HEIGHT 900
-# define FPS 40
+# define WIN_WIDTH 800
+# define WIN_HEIGHT 500
+# define FPS 60
 # define SIZEOF_TILE 64
 # define CHAR_SCALE 3
 # define CHAR_WIDTH 10

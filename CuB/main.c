@@ -6,7 +6,7 @@
 /*   By: mfadil <mfadil@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/16 14:47:53 by mfadil            #+#    #+#             */
-/*   Updated: 2023/11/03 16:27:42 by mfadil           ###   ########.fr       */
+/*   Updated: 2023/11/03 18:41:51 by mfadil           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ void	cub_initialize(t_main *game, char *filename)
 	game->freeze = false;
 	game->rays = (t_rays *)malloc(sizeof(t_rays) * game->consts.ray_nb);
 	if (!game->rays)
-		error_exit(game, "Malloc failed");
+		error_exit(game, "\e[0;31mMalloc failed");
 }
 
 void	init_constants(t_main *game)
@@ -58,14 +58,13 @@ void	init_constants(t_main *game)
 	game->consts.rotation_speed = 90 * (M_PI / 180);
 }
 
-
 int	main(int ac, char **av)
 {
 	t_main	game;
 
-	ft_bzero(&game, sizeof(t_main));
 	if (ac != 2)
-		error_exit(&game, "\tUsage:\t./cub3D [filename].cub");
+		error_exit(&game, "\e[0;31m\tUsage:\t./cub3D [filename].cub");
+	ft_bzero(&game, sizeof(t_main));
 	init_constants(&game);
 	if (ft_parser(&game, av[1]))
 		error_exit(&game, game.error.message);

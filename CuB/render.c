@@ -6,7 +6,7 @@
 /*   By: mfadil <mfadil@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/19 22:29:31 by mfadil            #+#    #+#             */
-/*   Updated: 2023/11/03 12:27:08 by mfadil           ###   ########.fr       */
+/*   Updated: 2023/11/03 18:32:30 by mfadil           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,13 +24,13 @@ unsigned long long time_now()
 
 void	update_frame(t_main *game)
 {
-	static float	last_ticks = 0.0; // mybe just 0
+	static float	last_ticks = 0; // mybe just 0
 
 	if (last_ticks < 0.5)
 		last_ticks = (float)time_now();
 	while ((float)time_now() - (last_ticks + game->consts.fps) < 0)
 		;
-	game->delta = (float)(time_now() - last_ticks) / 1000.0f;
+	game->delta = ((float)time_now() - last_ticks) / 1000.0f;
 	last_ticks = (float)time_now();
 	moving_character(game);
 	raycasting(game);
