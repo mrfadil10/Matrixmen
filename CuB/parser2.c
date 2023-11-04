@@ -6,7 +6,7 @@
 /*   By: mfadil <mfadil@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/27 11:11:26 by mfadil            #+#    #+#             */
-/*   Updated: 2023/11/03 12:20:19 by mfadil           ###   ########.fr       */
+/*   Updated: 2023/11/04 12:34:27 by mfadil           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,9 +48,9 @@ int	ft_check_occurs(t_main *game)
 	while (++i < game->map.height)
 		occurs += ft_int_occurences_counting(game->map.array[i], PLAYER, game->map.width);
 	if (!occurs)
-		return (error_setter(game, "Error: No player"));
+		return (error_setter(game, "\e[0;31mError: No player"));
 	else if (occurs > 1)
-		return (error_setter(game, "Error: Too many players"));
+		return (error_setter(game, "\e[0;31mError: Too many players"));
 	return (0);
 }
 
@@ -61,18 +61,18 @@ int	check_extension(t_main *game)
 
 	i = ft_occurences_counting(game->map.file.path, '.');
 	if (!i)
-		return (error_setter(game, "Invalid file"));
+		return (error_setter(game, "\e[0;33mInvalid file"));
 	if (!(i == 2 && game->map.file.path[0] == '.') && i > 1)
-		return (error_setter(game, "Invalid file"));
+		return (error_setter(game, "\e[0;33mInvalid file"));
 	extension = ft_split(game->map.file.path, ".");
 	if (!extension)
-		return (error_setter(game, "error malloc"));
-	i = -1;
-	while (extension[++i])
-		;
+		return (error_setter(game, "\e[0;31mError malloc"));
+	i = 0;
+	while (extension[i])
+		i++;
 	if (ft_strncmp(extension[i - 1], "cub", 4))
 		return (free_dbl_ptr((void **)extension)
-		+ error_setter(game, "Invalid file"));
+		+ error_setter(game, "\e[0;33mInvalid file"));
 	free_dbl_ptr((void **)extension);
 	return (0);
 }
@@ -117,7 +117,7 @@ int	parse_config(t_main *game)
 		if (is_line_empty(line))
 		{
 			if (game->parsing.map_is_init)
-				return (free_cub3d(line), error_setter(game, "Empty line in map"));
+				return (free_cub3d(line), error_setter(game, "\e[0;33mEmpty line in map"));
 			check_map(game, line);
 			free_cub3d(line);
 			continue ;

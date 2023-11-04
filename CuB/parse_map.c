@@ -6,7 +6,7 @@
 /*   By: mfadil <mfadil@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/27 21:53:28 by mfadil            #+#    #+#             */
-/*   Updated: 2023/10/30 23:29:48 by mfadil           ###   ########.fr       */
+/*   Updated: 2023/11/04 12:25:42 by mfadil           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,14 +41,13 @@ int	init_map_helper(t_main *game, t_init_map *struc)
 	}
 	game->map.array = (int **)malloc(sizeof(int *) * game->map.height);
 	if (!game->map.array)
-		return (error_setter(game, "Error: malloc"));
+		return (error_setter(game, "\e[0;31mError: malloc"));
 	game->parsing.map_is_init = true;
 	return (0);
 }
 
-void	init_map_norm(t_main *game, t_init_map *struc)
+void	init_map_norm(t_init_map *struc)
 {
-	game = (void *)game;
 	struc->iter.i = 0;
 	while (struc->quick_line[struc->iter.i] && struc->quick_line[struc->iter.i] == ' ')
 		struc->iter.i++;
@@ -82,7 +81,7 @@ int	initialize_map(t_main *game)
 			free(struc.quick_line);
 			continue ;
 		}
-		init_map_norm(game, &struc);
+		init_map_norm(&struc);
 		free(struc.quick_line);
 	}
 	return (init_map_helper(game, &struc));
@@ -115,7 +114,7 @@ static int	map_parsing_helper(t_main *game, t_parse_map *struc, char *line, int 
 	else if (line[struc->k] == ' ')
 		game->map.array[i][struc->j] = -1;
 	else
-		return (error_setter(game, "Error: Invalid character"));
+		return (error_setter(game, "\e[0;31mError: Invalid character"));
 	struc->k++;// to check
 	return (0);
 }
@@ -129,10 +128,10 @@ int	map_parsing(t_main *game, char *line)
 		if (initialize_map(game))
 			return (1);
 	if (i >= game->map.height + 1)
-		return (error_setter(game, "Error: index out of range"));
+		return (error_setter(game, "\e[0;31mError: index out of range"));
 	game->map.array[i] = (int *)malloc(sizeof(int) * game->map.width);
 	if (!game->map.array[i])
-		return (error_setter(game, "Error: malloc"));
+		return (error_setter(game, "\e[0;31mError: malloc"));
 	struc.j = -1;
 	struc.k = game->parsing.lowest_indent;
 	while (++struc.j < game->map.width)

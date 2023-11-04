@@ -6,7 +6,7 @@
 /*   By: mfadil <mfadil@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/21 17:25:01 by mfadil            #+#    #+#             */
-/*   Updated: 2023/11/03 23:29:30 by mfadil           ###   ########.fr       */
+/*   Updated: 2023/11/04 15:34:10 by mfadil           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -140,7 +140,7 @@ void	raycasting(t_main *game)
 	game->character.map_pos.x = (int)(game->character.position.x / SIZEOF_TILE);
 	game->character.map_pos.y = (int)(game->character.position.y / SIZEOF_TILE);
 	angle = game->character.angle - game->consts.half_fov + 0.0001;
-	while (iter.i < WIN_WIDTH)
+	while (iter.i < SCREEN_WIDTH)
 	{
 		game->rays[iter.i].angle = angle;
 		game->rays[iter.i].cos_x = cos(angle);

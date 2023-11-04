@@ -6,7 +6,7 @@
 /*   By: mfadil <mfadil@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/16 14:47:53 by mfadil            #+#    #+#             */
-/*   Updated: 2023/11/03 18:41:51 by mfadil           ###   ########.fr       */
+/*   Updated: 2023/11/04 16:57:17 by mfadil           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	error_exit(t_main *game, char *message)
 {
-	ft_putstr_fd("Error\n", 2);
+	ft_putstr_fd("\e[0;31mError\n", 2);
 	ft_putstr_fd(message, 2);
 	ft_putstr_fd("\n", 2);
 	if (game->allocs.map)
@@ -24,8 +24,8 @@ void	error_exit(t_main *game, char *message)
 
 void	cub_initialize(t_main *game, char *filename)
 {
-	game->window.width = WIN_WIDTH;
-	game->window.height = WIN_HEIGHT;
+	game->window.width = SCREEN_WIDTH;
+	game->window.height = SCREEN_HEIGHT;
 	game->map.file.path = filename;
 	game->parsing.map = false;
 	game->parsing.map_is_init = false;
@@ -46,14 +46,14 @@ void	init_constants(t_main *game)
 {
 	game->consts.fps = 1000 / FPS;
 	game->consts.tau = 2 * M_PI;
-	game->consts.mid_width = WIN_WIDTH / 2;
-	game->consts.mid_height = WIN_HEIGHT / 2;
+	game->consts.mid_width = SCREEN_WIDTH / 2;
+	game->consts.mid_height = SCREEN_HEIGHT / 2;
 	game->consts.field_of_view = 60 * (M_PI / 180);
 	game->consts.half_fov = game->consts.field_of_view / 2;
-	game->consts.screen_distance = WIN_WIDTH / 2 / tan(game->consts.half_fov);
-	game->consts.ray_nb = WIN_WIDTH;
+	game->consts.screen_distance = (SCREEN_WIDTH / 2) / tan(game->consts.half_fov);
 	game->consts.half_ray_nb = game->consts.ray_nb / 2;
-	game->consts.scale = WIN_WIDTH / game->consts.ray_nb;
+	game->consts.ray_nb = SCREEN_WIDTH;
+	game->consts.scale = SCREEN_WIDTH / game->consts.ray_nb;
 	game->consts.angle_delta = game->consts.field_of_view / game->consts.ray_nb;
 	game->consts.rotation_speed = 90 * (M_PI / 180);
 }

@@ -6,7 +6,7 @@
 /*   By: mfadil <mfadil@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/16 14:49:49 by mfadil            #+#    #+#             */
-/*   Updated: 2023/11/03 17:55:31 by mfadil           ###   ########.fr       */
+/*   Updated: 2023/11/04 16:28:56 by mfadil           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,8 @@
 # include <sys/stat.h>
 # include <errno.h>
 
-# define WIN_WIDTH 800
-# define WIN_HEIGHT 500
+# define SCREEN_WIDTH 800
+# define SCREEN_HEIGHT 500
 # define FPS 60
 # define SIZEOF_TILE 64
 # define CHAR_SCALE 3
@@ -199,7 +199,7 @@ typedef struct s_character
 	float		angle;
 	float		mov_speed;
 	float		rots_speed;
-	float			rots_dir;
+	float		rots_dir;
 	int			walk_dir;
 	int			turn_dir;
 	t_axes		position;

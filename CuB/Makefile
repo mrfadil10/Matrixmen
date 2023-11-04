@@ -6,7 +6,7 @@
 #    By: mfadil <mfadil@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/23 13:33:36 by mfadil            #+#    #+#              #
-#    Updated: 2023/11/03 12:20:49 by mfadil           ###   ########.fr        #
+#    Updated: 2023/11/04 17:03:13 by mfadil           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@ NAME = cub
 
 CC = cc
 
-FLAGS = -Wall -Wextra -Werror 
+FLAGS = -Wall -Wextra -Werror
 
 EXFLAGS = -lmlx -framework OpenGL -framework AppKit
 
@@ -34,7 +34,7 @@ SRC =	cub_hooks.c \
 		parse_utils.c \
 		parser.c \
 		parser2.c \
-		parser3.c \
+		parser3.c
 
 OBJ_DIR = Objects
 
@@ -56,8 +56,10 @@ $(OBJ_DIR)/%.o:%.c $(HEADER)
 
 clean:
 	rm -rf $(OBJ_DIR)
+	make clean --directory=./libft
 
 fclean: clean
 	rm -rf $(NAME)
+	make fclean --directory=./libft
 
 re: fclean all

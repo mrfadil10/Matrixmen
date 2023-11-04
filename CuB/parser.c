@@ -6,7 +6,7 @@
 /*   By: mfadil <mfadil@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/27 10:48:25 by mfadil            #+#    #+#             */
-/*   Updated: 2023/10/30 21:29:45 by mfadil           ###   ########.fr       */
+/*   Updated: 2023/11/04 16:55:31 by mfadil           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,25 +25,25 @@ int	check_is_open(t_main *game, char *filename, int *fd)
 	if (*fd == -1)
 	{
 		if (errno == EACCES)
-			return (error_setter(game, "Permission denied"));
+			return (error_setter(game, "\e[0;33mPermission denied"));
 		else if (errno == ENOENT)
-			return (error_setter(game, "No such file or directory"));
+			return (error_setter(game, "\e[0;33mNo such file or directory"));
+		else if (errno == EISDIR)
+			return (error_setter(game, "\e[0;31mIs a directory"));
 		else
-			return (error_setter(game, "Unknown error"));
-		//else if (errno == EISDIR)
-		//	return (error_setter(game, "Is a directory"));
+			return (error_setter(game, "\e[0;31mUnknown error"));
 	}
 	return (0);
 }
 
-int	check_is_exist(t_main *game)
-{
-	return (check_is_open(game, game->map.file.path, &game->map.file.fd));
-}
+//int	check_is_exist(t_main *game)
+//{
+//	return (check_is_open(game, game->map.file.path, &game->map.file.fd));
+//}
 
 int	parsing_file(t_main *game)
 {
-	if (check_is_exist(game))
+	if (check_is_open(game, game->map.file.path, &game->map.file.fd))
 		return (1);
 	if (check_extension(game))
 		return (1);
@@ -58,8 +58,7 @@ int	ft_parser(t_main *game, char *filename)
 	if (parsing_file(game))
 		return (1);
 	if (close(game->map.file.fd) == -1)
-		return (error_setter(game, "Error: could not close file"));
-	printf("parsing_file\n");
+		return (error_setter(game, "\e[0;31mError: could not close file"));
 	if (check_borders(game))
 		return (1);
 	if (ft_check_occurs(game))
