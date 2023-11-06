@@ -6,7 +6,7 @@
 /*   By: mfadil <mfadil@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/16 14:47:53 by mfadil            #+#    #+#             */
-/*   Updated: 2023/11/04 16:57:17 by mfadil           ###   ########.fr       */
+/*   Updated: 2023/11/06 10:24:27 by mfadil           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,8 @@ void	init_constants(t_main *game)
 	game->consts.mid_height = SCREEN_HEIGHT / 2;
 	game->consts.field_of_view = 60 * (M_PI / 180);
 	game->consts.half_fov = game->consts.field_of_view / 2;
-	game->consts.screen_distance = (SCREEN_WIDTH / 2) / tan(game->consts.half_fov);
+	game->consts.screen_distance = (SCREEN_WIDTH / 2)
+		/ tan(game->consts.half_fov);
 	game->consts.half_ray_nb = game->consts.ray_nb / 2;
 	game->consts.ray_nb = SCREEN_WIDTH;
 	game->consts.scale = SCREEN_WIDTH / game->consts.ray_nb;
@@ -69,7 +70,8 @@ int	main(int ac, char **av)
 	if (ft_parser(&game, av[1]))
 		error_exit(&game, game.error.message);
 	game.mlx = mlx_init();
-	game.window.reference = mlx_new_window(game.mlx, game.window.width, game.window.height, "cub3D");
+	game.window.reference = mlx_new_window(game.mlx, game.window.width,
+			game.window.height, "cub3D");
 	if (init_cub3d(&game))
 		error_exit(&game, game.error.message);
 	srand((unsigned int) time(NULL));

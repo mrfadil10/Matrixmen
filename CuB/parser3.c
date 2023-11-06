@@ -6,7 +6,7 @@
 /*   By: mfadil <mfadil@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/27 15:13:32 by mfadil            #+#    #+#             */
-/*   Updated: 2023/10/29 15:24:58 by mfadil           ###   ########.fr       */
+/*   Updated: 2023/11/06 09:27:23 by mfadil           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@ static int	color_joiner(t_main *game, t_parse_color *str, char **line)
 		return (error_setter(game, "Error: Invalid color"));
 	str->rgb = ft_split(str->join, ",");
 	free(str->join);
+	printf("str->join = %s\n", str->join);
 	if (!str->rgb)
 		return (error_setter(game, "error malloc"));
 	return (0);

@@ -6,7 +6,7 @@
 /*   By: mfadil <mfadil@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/27 10:48:25 by mfadil            #+#    #+#             */
-/*   Updated: 2023/11/04 16:55:31 by mfadil           ###   ########.fr       */
+/*   Updated: 2023/11/05 16:17:11 by mfadil           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,11 +35,6 @@ int	check_is_open(t_main *game, char *filename, int *fd)
 	}
 	return (0);
 }
-
-//int	check_is_exist(t_main *game)
-//{
-//	return (check_is_open(game, game->map.file.path, &game->map.file.fd));
-//}
 
 int	parsing_file(t_main *game)
 {
