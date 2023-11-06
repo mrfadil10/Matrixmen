@@ -6,17 +6,17 @@
 /*   By: mfadil <mfadil@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/19 22:29:31 by mfadil            #+#    #+#             */
-/*   Updated: 2023/11/03 18:32:30 by mfadil           ###   ########.fr       */
+/*   Updated: 2023/11/06 21:48:20 by mfadil           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-typedef struct timespec s_time;
+typedef struct timespec	t_time;
 
-unsigned long long time_now()
+unsigned long long	time_now(void)
 {
-	s_time	time;
+	t_time	time;
 
 	clock_gettime(CLOCK_MONOTONIC, &time);
 	return (time.tv_sec * 1000 + time.tv_nsec / 1000000);
@@ -24,7 +24,7 @@ unsigned long long time_now()
 
 void	update_frame(t_main *game)
 {
-	static float	last_ticks = 0; // mybe just 0
+	static float	last_ticks = 0;
 
 	if (last_ticks < 0.5)
 		last_ticks = (float)time_now();
@@ -42,8 +42,10 @@ int	rendering_cub(t_main *game)
 	static unsigned int	fps = FPS;
 	clock_t				elapse_tick;
 
-	game->frame.ref = mlx_new_image(game->mlx, game->window.width, game->window.height);
-	game->frame.addr = mlx_get_data_addr(game->frame.ref, &game->frame.bpp, &game->frame.line_lnt, &game->frame.endian);
+	game->frame.ref = mlx_new_image(game->mlx,
+			game->window.width, game->window.height);
+	game->frame.addr = mlx_get_data_addr(game->frame.ref,
+			&game->frame.bpp, &game->frame.line_lnt, &game->frame.endian);
 	frames++;
 	elapse_tick = clock() - game->time_to_start;
 	if (game->time_to_start >= CLOCKS_PER_SEC)
@@ -52,9 +54,9 @@ int	rendering_cub(t_main *game)
 		game->time_to_start = clock();
 		frames = 0;
 	}
-	//puts("rendering");
 	update_frame(game);
-	mlx_put_image_to_window(game->mlx, game->window.reference, game->frame.ref, 0, 0);
+	mlx_put_image_to_window(game->mlx,
+		game->window.reference, game->frame.ref, 0, 0);
 	mlx_destroy_image(game->mlx, game->frame.ref);
 	return (0);
 }

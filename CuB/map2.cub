@@ -1,15 +1,15 @@
 
-NO		./assets/0.xpm
+NO		./assets/flag2.xpm
 
-SO		./assets/0.xpm
+SO		./assets/flag2.xpm
 
-EA		./assets/0.xpm
+EA		./assets/flag2.xpm
 
-WE		./assets/0.xpm
+WE		./assets/flag2.xpm
 
 F	53, 94, 59
 
-C	64, 224, 208
+C	0, 0, 100
 
 
         1111111111111111111111111

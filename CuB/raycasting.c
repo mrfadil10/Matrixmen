@@ -6,7 +6,7 @@
 /*   By: mfadil <mfadil@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/21 17:25:01 by mfadil            #+#    #+#             */
-/*   Updated: 2023/11/04 15:34:10 by mfadil           ###   ########.fr       */
+/*   Updated: 2023/11/06 22:11:51 by mfadil           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,8 @@ void	horizon_steps(t_main *game, t_axes *distance, float *depth, int i)
 	else
 	{
 		distance->y = -SIZEOF_TILE;
-		game->rays[i].horz_pt.y = game->character.map_pos.y * SIZEOF_TILE - 0.0001;
+		game->rays[i].horz_pt.y = game->character.map_pos.y
+			* SIZEOF_TILE - 0.0001;
 	}
 	game->rays[i].horz_depth = game->rays[i].horz_pt.y - game->character.position.y;
 	game->rays[i].horz_depth /= game->rays[i].sin_x;
