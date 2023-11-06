@@ -6,7 +6,7 @@
 /*   By: mfadil <mfadil@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/16 14:49:49 by mfadil            #+#    #+#             */
-/*   Updated: 2023/11/05 22:22:07 by mfadil           ###   ########.fr       */
+/*   Updated: 2023/11/06 17:04:08 by mfadil           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -281,7 +281,7 @@ void	put_pixel(t_main *game, int color, float x, float y);
 
 int		parse_config(t_main *game);
 void	cub_initialize(t_main *game, char *filename);
-int		error_setter(t_main *game, char *error);
+int		set_err_msg(t_main *game, char *error);
 int		check_extension(t_main *game);
 int		free_cub3d(void *ptr);
 int		check_is_open(t_main *game, char *filename, int *fd);

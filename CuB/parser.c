@@ -6,13 +6,13 @@
 /*   By: mfadil <mfadil@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/27 10:48:25 by mfadil            #+#    #+#             */
-/*   Updated: 2023/11/05 16:17:11 by mfadil           ###   ########.fr       */
+/*   Updated: 2023/11/06 17:04:08 by mfadil           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-int	error_setter(t_main *game, char *error)
+int	set_err_msg(t_main *game, char *error)
 {
 	game->error.message = error;
 	game->error.code = 1;
@@ -25,13 +25,13 @@ int	check_is_open(t_main *game, char *filename, int *fd)
 	if (*fd == -1)
 	{
 		if (errno == EACCES)
-			return (error_setter(game, "\e[0;33mPermission denied"));
+			return (set_err_msg(game, "\e[0;33mPermission denied"));
 		else if (errno == ENOENT)
-			return (error_setter(game, "\e[0;33mNo such file or directory"));
+			return (set_err_msg(game, "\e[0;33mNo such file or directory"));
 		else if (errno == EISDIR)
-			return (error_setter(game, "\e[0;31mIs a directory"));
+			return (set_err_msg(game, "\e[0;31mIs a directory"));
 		else
-			return (error_setter(game, "\e[0;31mUnknown error"));
+			return (set_err_msg(game, "\e[0;31mUnknown error"));
 	}
 	return (0);
 }
@@ -53,7 +53,7 @@ int	ft_parser(t_main *game, char *filename)
 	if (parsing_file(game))
 		return (1);
 	if (close(game->map.file.fd) == -1)
-		return (error_setter(game, "\e[0;31mError: could not close file"));
+		return (set_err_msg(game, "\e[0;31mError: could not close file"));
 	if (check_borders(game))
 		return (1);
 	if (ft_check_occurs(game))
