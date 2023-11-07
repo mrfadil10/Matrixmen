@@ -6,7 +6,7 @@
 /*   By: mfadil <mfadil@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/27 15:13:32 by mfadil            #+#    #+#             */
-/*   Updated: 2023/11/06 20:10:16 by mfadil           ###   ########.fr       */
+/*   Updated: 2023/11/07 22:49:19 by mfadil           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,8 +56,8 @@ static int	color_helper(t_main *game, t_parse_color *str)
 		str->iter.i++;
 	if (str->iter.i != 3)
 		return (set_err_msg(game, "\e[0;31mError: Invalid color"));
-	str->iter.i = 0;
-	while (str->rgb[str->iter.i])
+	str->iter.i = -1;
+	while (str->rgb[++str->iter.i])
 	{
 		str->trim = ft_strtrim(str->rgb[str->iter.i], " \t");
 		if (!str->trim)
@@ -74,7 +74,6 @@ static int	color_helper(t_main *game, t_parse_color *str)
 					free_dbl_ptr((void **)str->rgb));
 			str->iter.j++;
 		}
-		str->iter.i++;
 	}
 	return (0);
 }
@@ -141,21 +140,4 @@ int	identify_file_lines(t_main *game, char **arr)
 		return (parse_colors(game,
 				&game->assets.ceiling, arr, &game->parsing.ceiling));
 	return (set_err_msg(game, "\e[0;31mError: Invalid identifier"));
-}
-
-int	parse_lineof_file(t_main *game, char *line)
-{
-	char	**split;
-
-	if (game->parsing.map)
-		return (map_parsing(game, line));
-	line[ft_strlen(line) - 1] = 0;
-	split = ft_split(line, " \t\n");
-	if (!split)
-		return (set_err_msg(game, "\e[0;31merror malloc"));
-	printf("split[0] = %s\n", split[0]);
-	if (identify_file_lines(game, split))
-		return (free_dbl_ptr((void **)split), 1);
-	free_dbl_ptr((void **)split);
-	return (0);
 }

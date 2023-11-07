@@ -6,7 +6,7 @@
 /*   By: mfadil <mfadil@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/27 10:48:25 by mfadil            #+#    #+#             */
-/*   Updated: 2023/11/06 17:04:08 by mfadil           ###   ########.fr       */
+/*   Updated: 2023/11/07 22:49:37 by mfadil           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,23 @@ int	check_is_open(t_main *game, char *filename, int *fd)
 		else
 			return (set_err_msg(game, "\e[0;31mUnknown error"));
 	}
+	return (0);
+}
+
+int	parse_lineof_file(t_main *game, char *line)
+{
+	char	**split;
+
+	if (game->parsing.map)
+		return (map_parsing(game, line));
+	line[ft_strlen(line) - 1] = 0;
+	split = ft_split(line, " \t\n");
+	if (!split)
+		return (set_err_msg(game, "\e[0;31merror malloc"));
+	printf("split[0] = %s\n", split[0]);
+	if (identify_file_lines(game, split))
+		return (free_dbl_ptr((void **)split), 1);
+	free_dbl_ptr((void **)split);
 	return (0);
 }
 

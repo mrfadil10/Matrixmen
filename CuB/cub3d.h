@@ -6,7 +6,7 @@
 /*   By: mfadil <mfadil@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/16 14:49:49 by mfadil            #+#    #+#             */
-/*   Updated: 2023/11/07 18:08:13 by mfadil           ###   ########.fr       */
+/*   Updated: 2023/11/07 22:49:10 by mfadil           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -293,5 +293,6 @@ int		map_parsing(t_main *game, char *line);
 int		parse_lineof_file(t_main *game, char *line);
 int		check_borders(t_main *game);
 int		ft_parser(t_main *game, char *filename);
+int		identify_file_lines(t_main *game, char **arr);
 
 #endif

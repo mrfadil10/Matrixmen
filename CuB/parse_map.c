@@ -6,7 +6,7 @@
 /*   By: mfadil <mfadil@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/27 21:53:28 by mfadil            #+#    #+#             */
-/*   Updated: 2023/11/06 17:04:08 by mfadil           ###   ########.fr       */
+/*   Updated: 2023/11/07 22:55:13 by mfadil           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,8 @@ int	init_map_helper(t_main *game, t_init_map *struc)
 void	init_map_norm(t_init_map *struc)
 {
 	struc->iter.i = 0;
-	while (struc->quick_line[struc->iter.i] && struc->quick_line[struc->iter.i] == ' ')
+	while (struc->quick_line[struc->iter.i]
+		&& struc->quick_line[struc->iter.i] == ' ')
 		struc->iter.i++;
 	struc->iter.j = struc->iter.i;
 	while (struc->quick_line[struc->iter.j]
