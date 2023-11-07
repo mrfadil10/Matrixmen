@@ -6,7 +6,7 @@
 /*   By: mfadil <mfadil@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/16 14:49:49 by mfadil            #+#    #+#             */
-/*   Updated: 2023/11/06 23:02:33 by mfadil           ###   ########.fr       */
+/*   Updated: 2023/11/07 18:08:13 by mfadil           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -271,7 +271,7 @@ int		key_hook_cub(int keycode, t_main *game);
 int		key_release(int keycode, t_main *game);
 void	check_collision(t_main *game, float δx, float δy);
 int		moving_character(t_main *game);
-bool	check_is_wall(int c);
+int		check_is_wall(int c);
 void	raycasting(t_main *game);
 int		rendering_cub(t_main *game);
 void	drawing_walls(t_main *game, t_iter iter, float ray_angle);

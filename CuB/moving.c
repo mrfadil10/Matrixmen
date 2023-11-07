@@ -6,26 +6,26 @@
 /*   By: mfadil <mfadil@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/20 23:23:50 by mfadil            #+#    #+#             */
-/*   Updated: 2023/11/03 19:51:49 by mfadil           ###   ########.fr       */
+/*   Updated: 2023/11/07 12:41:33 by mfadil           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-bool	check_is_wall(int c)
+int	check_is_wall(int c)
 {
 	if (c == 1)
-		return (true);
-	return (false);
+		return (1);
+	return (0);
 }
 
-bool	has_wall_at(t_main *game, float x, float y)
+int	has_wall_at(t_main *game, float x, float y)
 {
 	if (x < 0 || y < 0 || x > game->map.width * SIZEOF_TILE
 		|| y > game->map.height * SIZEOF_TILE)
-		return (true);
+		return (1);
 	return (check_is_wall(game->map.array[(int)(y / SIZEOF_TILE)]
-			[(int)(x / SIZEOF_TILE)]));
+		[(int)(x / SIZEOF_TILE)]));
 }
 
 int	moving_character(t_main *game)
@@ -50,8 +50,8 @@ int	moving_character(t_main *game)
 	if (!has_wall_at(game, game->character.position.x,
 			game->character.position.y + diff.y * CHAR_SCALE))
 		game->character.position.y += diff.y;
-	game->character.angle += (game->character.rots_dir * game->character.rots_dir) *
-		game->character.rots_dir;
+	game->character.angle += (game->character.rots_dir
+			* game->character.rots_dir) * game->character.rots_dir;
 	game->character.angle = fmod(game->character.angle, game->consts.tau);
 	return (0);
 }
