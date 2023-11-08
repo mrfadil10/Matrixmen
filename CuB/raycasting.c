@@ -6,7 +6,7 @@
 /*   By: mfadil <mfadil@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/21 17:25:01 by mfadil            #+#    #+#             */
-/*   Updated: 2023/11/07 22:36:45 by mfadil           ###   ########.fr       */
+/*   Updated: 2023/11/08 12:24:09 by mfadil           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,9 +44,11 @@ void	vertical_steps(t_main *game, t_axes *distance, float *depth, int i)
 	else
 	{
 		distance->x = -SIZEOF_TILE;
-		game->rays[i].vert_pt.x = game->character.map_pos.x * SIZEOF_TILE - 0.0001;
+		game->rays[i].vert_pt.x
+			= game->character.map_pos.x * SIZEOF_TILE - 0.0001;
 	}
-	game->rays[i].vert_depth = game->rays[i].vert_pt.x - game->character.position.x;
+	game->rays[i].vert_depth
+		= game->rays[i].vert_pt.x - game->character.position.x;
 	game->rays[i].vert_depth /= game->rays[i].cos_x;
 	game->rays[i].vert_pt.y = game->rays[i].vert_depth * game->rays[i].sin_x;
 	game->rays[i].vert_pt.y += game->character.position.y;
@@ -133,6 +135,7 @@ void	steps_and_intersection(t_main *game, int i)
 	vertical_inter(game, &distances, depth, i);
 	intersection(game, i);
 }
+
 void	raycasting(t_main *game)
 {
 	t_iter	iter;

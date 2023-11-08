@@ -6,16 +6,16 @@
 /*   By: mfadil <mfadil@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/08 12:42:13 by mfadil            #+#    #+#             */
-/*   Updated: 2023/10/29 14:38:54 by mfadil           ###   ########.fr       */
+/*   Updated: 2023/11/08 12:18:06 by mfadil           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef LIBFT_H
 # define LIBFT_H
-# include<string.h>
-# include<stdio.h>
-# include<stdlib.h>
-# include<unistd.h>
+# include <string.h>
+# include <stdio.h>
+# include <stdlib.h>
+# include <unistd.h>
 
 int				ft_atoi(const char *str);
 void			ft_bzero(void *s, size_t n);
@@ -50,7 +50,6 @@ unsigned int	ft_strlcpy(char *dest, char *src, unsigned int size);
 char			*ft_strmapi(char const *s, char (*f)(unsigned int, char));
 char			*ft_itoa(int n);
 char			*ft_substr(char const *s, unsigned int start, size_t len);
-//char			**ft_split(char const *s, char *c);
-char	**ft_split(char const *s, char const *charset);
+char			**ft_split(char const *s, char const *charset);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: mfadil <mfadil@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/27 11:11:26 by mfadil            #+#    #+#             */
-/*   Updated: 2023/11/06 17:04:08 by mfadil           ###   ########.fr       */
+/*   Updated: 2023/11/08 16:57:22 by mfadil           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,9 +49,9 @@ int	ft_check_occurs(t_main *game)
 		occurs += ft_int_occurences_counting(game->map.array[i], PLAYER,
 				game->map.width);
 	if (!occurs)
-		return (set_err_msg(game, "\e[0;31mError: No player"));
+		return (set_err_msg(game, "\e[1;31mError: No player"));
 	else if (occurs > 1)
-		return (set_err_msg(game, "\e[0;31mError: Too many players"));
+		return (set_err_msg(game, "\e[1;31mError: Too many players"));
 	return (0);
 }
 
@@ -62,23 +62,23 @@ int	check_extension(t_main *game)
 
 	count = ft_occurences_counting(game->map.file.path, '.');
 	if (!count)
-		return (set_err_msg(game, "\e[0;33mInvalid file"));
+		return (set_err_msg(game, "\e[1;33mInvalid file"));
 	if (!(count == 2 && game->map.file.path[0] == '.') && count > 1)
-		return (set_err_msg(game, "\e[0;33mInvalid file"));
+		return (set_err_msg(game, "\e[1;33mInvalid file"));
 	extension = ft_split(game->map.file.path, ".");
 	if (!extension)
-		return (set_err_msg(game, "\e[0;31mError malloc"));
+		return (set_err_msg(game, "\e[1;31mError malloc"));
 	count = 0;
 	while (extension[count])
 		count++;
 	if (ft_strncmp(extension[count - 1], "cub", 4))
 		return (free_dbl_ptr((void **)extension) + set_err_msg(game,
-				"\e[0;33mInvalid file"));
+				"\e[1;33mInvalid file"));
 	free_dbl_ptr((void **)extension);
 	return (0);
 }
 
-bool	is_line_empty(char *line)
+int	is_line_empty(char *line)
 {
 	int	i;
 
@@ -86,8 +86,8 @@ bool	is_line_empty(char *line)
 	while ((line[i] >= 9 && line[i] <= 13) || line[i] == ' ')
 		i++;
 	if (line[i] == '\0' || line[i] == '\n')
-		return (true);
-	return (false);
+		return (1);
+	return (0);
 }
 
 int	check_map(t_main *game, char *line)
@@ -121,7 +121,7 @@ int	parse_config(t_main *game)
 		{
 			if (game->parsing.map_is_init)
 				return (free_cub3d(line),
-					set_err_msg(game, "\e[0;33mEmpty line in map"));
+					set_err_msg(game, "\e[1;33mEmpty line in map"));
 			check_map(game, line);
 			free_cub3d(line);
 			continue ;

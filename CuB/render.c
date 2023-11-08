@@ -6,7 +6,7 @@
 /*   By: mfadil <mfadil@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/19 22:29:31 by mfadil            #+#    #+#             */
-/*   Updated: 2023/11/06 21:48:20 by mfadil           ###   ########.fr       */
+/*   Updated: 2023/11/08 15:49:53 by mfadil           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,18 +36,8 @@ void	update_frame(t_main *game)
 	raycasting(game);
 }
 
-int	rendering_cub(t_main *game)
+void	handle_frame(t_main *game, unsigned int frames, unsigned int fps)
 {
-	static unsigned int	frames = 0;
-	static unsigned int	fps = FPS;
-	clock_t				elapse_tick;
-
-	game->frame.ref = mlx_new_image(game->mlx,
-			game->window.width, game->window.height);
-	game->frame.addr = mlx_get_data_addr(game->frame.ref,
-			&game->frame.bpp, &game->frame.line_lnt, &game->frame.endian);
-	frames++;
-	elapse_tick = clock() - game->time_to_start;
 	if (game->time_to_start >= CLOCKS_PER_SEC)
 	{
 		fps = frames;
@@ -58,5 +48,20 @@ int	rendering_cub(t_main *game)
 	mlx_put_image_to_window(game->mlx,
 		game->window.reference, game->frame.ref, 0, 0);
 	mlx_destroy_image(game->mlx, game->frame.ref);
+}
+
+int	rendering_cub(t_main *game)
+{
+	static unsigned int	frames = 0;
+	static unsigned int	fps = FPS;
+	clock_t				ticks;
+
+	frames++;
+	game->frame.ref = mlx_new_image(game->mlx,
+			game->window.width, game->window.height);
+	game->frame.addr = mlx_get_data_addr(game->frame.ref,
+			&game->frame.bpp, &game->frame.line_lnt, &game->frame.endian);
+	ticks = clock() - game->time_to_start;
+	handle_frame(game, frames, fps);
 	return (0);
 }

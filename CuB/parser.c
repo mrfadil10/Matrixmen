@@ -6,7 +6,7 @@
 /*   By: mfadil <mfadil@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/27 10:48:25 by mfadil            #+#    #+#             */
-/*   Updated: 2023/11/07 22:49:37 by mfadil           ###   ########.fr       */
+/*   Updated: 2023/11/08 16:35:32 by mfadil           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,27 +25,31 @@ int	check_is_open(t_main *game, char *filename, int *fd)
 	if (*fd == -1)
 	{
 		if (errno == EACCES)
-			return (set_err_msg(game, "\e[0;33mPermission denied"));
+			return (set_err_msg(game, "\e[1;33mPermission denied"));
 		else if (errno == ENOENT)
-			return (set_err_msg(game, "\e[0;33mNo such file or directory"));
+			return (set_err_msg(game, "\e[1;33mNo such file or directory"));
 		else if (errno == EISDIR)
-			return (set_err_msg(game, "\e[0;31mIs a directory"));
+			return (set_err_msg(game, "\e[1;31mIs a directory"));
 		else
-			return (set_err_msg(game, "\e[0;31mUnknown error"));
+			return (set_err_msg(game, "\e[1;31mUnknown error"));
 	}
 	return (0);
 }
 
 int	parse_lineof_file(t_main *game, char *line)
 {
-	char	**split;
+	size_t		i;
+	char		**split;
 
+	i = 0;
 	if (game->parsing.map)
 		return (map_parsing(game, line));
-	line[ft_strlen(line) - 1] = 0;
+	while (line[i])
+		i++;
+	line[i - 1] = 0;
 	split = ft_split(line, " \t\n");
 	if (!split)
-		return (set_err_msg(game, "\e[0;31merror malloc"));
+		return (set_err_msg(game, "\e[1;31merror malloc"));
 	printf("split[0] = %s\n", split[0]);
 	if (identify_file_lines(game, split))
 		return (free_dbl_ptr((void **)split), 1);
@@ -64,13 +68,13 @@ int	parsing_file(t_main *game)
 	return (0);
 }
 
-int	ft_parser(t_main *game, char *filename)
+int	ft_parsing_cub(t_main *game, char *filename)
 {
 	cub_initialize(game, filename);
 	if (parsing_file(game))
 		return (1);
 	if (close(game->map.file.fd) == -1)
-		return (set_err_msg(game, "\e[0;31mError: could not close file"));
+		return (set_err_msg(game, "\e[1;31mError: could not close file"));
 	if (check_borders(game))
 		return (1);
 	if (ft_check_occurs(game))

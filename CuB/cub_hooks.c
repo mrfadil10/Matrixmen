@@ -6,7 +6,7 @@
 /*   By: mfadil <mfadil@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/19 17:37:07 by mfadil            #+#    #+#             */
-/*   Updated: 2023/11/06 10:15:35 by mfadil           ###   ########.fr       */
+/*   Updated: 2023/11/08 15:07:53 by mfadil           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ int	key_hook_cub(int keycode, t_main *game)
 	return (0);
 }
 
-int	key_release(int keycode, t_main *game)
+int	init_keys(int keycode, t_main *game)
 {
 	if (keycode == KEY_W)
 		game->character.walk_dir = 0;

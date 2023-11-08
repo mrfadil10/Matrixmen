@@ -6,12 +6,12 @@
 /*   By: mfadil <mfadil@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/07 19:22:03 by mfadil            #+#    #+#             */
-/*   Updated: 2022/10/18 14:36:44 by mfadil           ###   ########.fr       */
+/*   Updated: 2023/11/08 12:24:24 by mfadil           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdio.h>
-#include<string.h>
+#include <string.h>
 
 void	ft_bzero(void *s, size_t n)
 {

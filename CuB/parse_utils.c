@@ -6,7 +6,7 @@
 /*   By: mfadil <mfadil@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/28 23:08:45 by mfadil            #+#    #+#             */
-/*   Updated: 2023/11/06 19:30:15 by mfadil           ###   ########.fr       */
+/*   Updated: 2023/11/08 16:29:05 by mfadil           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,16 +23,16 @@ int	map_component(t_main *game, int i, int j)
 {
 	if (j + 1 < game->map.width && is_a_border(game->map.array[i][j + 1])
 		&& game->map.array[i][j] == -1)
-		return (set_err_msg(game, "\e[0;31mError: Invalid border"));
+		return (set_err_msg(game, "\e[1;31mError: Invalid border"));
 	if (j + 1 < game->map.width && is_a_border(game->map.array[i][j])
 		&& game->map.array[i][j + 1] == -1)
-		return (set_err_msg(game, "\e[0;31mError: Invalid border"));
+		return (set_err_msg(game, "\e[1;31mError: Invalid border"));
 	if (i + 1 < game->map.height && is_a_border(game->map.array[i + 1][j])
 		&& game->map.array[i][j] == -1)
-		return (set_err_msg(game, "\e[0;31mError: Invalid border"));
+		return (set_err_msg(game, "\e[1;31mError: Invalid border"));
 	if (i + 1 < game->map.height && is_a_border(game->map.array[i][j])
 		&& game->map.array[i + 1][j] == -1)
-		return (set_err_msg(game, "\e[0;31mError: Invalid border"));
+		return (set_err_msg(game, "\e[1;31mError: Invalid border"));
 	return (0);
 }
 
@@ -61,7 +61,7 @@ int	check_borders(t_main *game)
 	{
 		if (is_a_border(game->map.array[0][iter.i]) ||
 			is_a_border(game->map.array[game->map.height - 1][iter.i]))
-			return (set_err_msg(game, "\e[0;31mError: Invalid border"));
+			return (set_err_msg(game, "\e[1;31mError: Invalid border"));
 		iter.i++;
 	}
 	iter.i = 0;
@@ -69,7 +69,7 @@ int	check_borders(t_main *game)
 	{
 		if (is_a_border(game->map.array[iter.i][0]) ||
 			is_a_border(game->map.array[iter.i][game->map.width - 1]))
-			return (set_err_msg(game, "\e[0;31mError: Invalid border"));
+			return (set_err_msg(game, "\e[1;31mError: Invalid border"));
 		iter.i++;
 	}
 	iter.i = 0;

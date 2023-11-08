@@ -6,7 +6,7 @@
 /*   By: mfadil <mfadil@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/24 16:56:35 by mfadil            #+#    #+#             */
-/*   Updated: 2023/11/06 11:11:29 by mfadil           ###   ########.fr       */
+/*   Updated: 2023/11/08 12:14:08 by mfadil           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,11 +61,6 @@ void	drawing_stripe(t_main *game, t_iter iter, int top_wall, int wall_bottom)
 		put_stripes(game, text_offset, iter, i);
 		i++;
 	}
-}
-
-int	create_rgb(t_color color)
-{
-	return (color.r << 16 | color.g << 8 | color.b);
 }
 
 void	put_pixel(t_main *game, int color, float x, float y)

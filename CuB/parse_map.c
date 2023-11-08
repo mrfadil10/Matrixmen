@@ -6,7 +6,7 @@
 /*   By: mfadil <mfadil@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/27 21:53:28 by mfadil            #+#    #+#             */
-/*   Updated: 2023/11/07 22:55:13 by mfadil           ###   ########.fr       */
+/*   Updated: 2023/11/08 16:18:03 by mfadil           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ int	init_map_helper(t_main *game, t_init_map *struc)
 	}
 	game->map.array = (int **)malloc(sizeof(int *) * game->map.height);
 	if (!game->map.array)
-		return (set_err_msg(game, "\e[0;31mError: malloc"));
+		return (set_err_msg(game, "\e[1;31mError: malloc"));
 	game->parsing.map_is_init = true;
 	return (0);
 }
@@ -91,11 +91,11 @@ int	initialize_map(t_main *game)
 static void	map_setting_helper(t_main *game, float degre, int i, int j)
 {
 	game->character.position.x = j * SIZEOF_TILE + SIZEOF_TILE / 2;
-	game->character.position.y = i * SIZEOF_TILE + SIZEOF_TILE / 2; // to check
+	game->character.position.y = i * SIZEOF_TILE + SIZEOF_TILE / 2;
 	game->character.width = 10;
 	game->character.height = 32;
 	game->character.mov_speed = 250;
-	game->character.rots_speed = game->consts.rotation_speed; // to check
+	game->character.rots_speed = game->consts.rotation_speed;
 	game->character.angle = degre;
 	game->map.array[i][j] = PLAYER;
 }
@@ -115,7 +115,7 @@ static int	map_parsing_helper(t_main *game, t_parse_map *struc, char *line, int 
 	else if (line[struc->k] == ' ')
 		game->map.array[i][struc->j] = -1;
 	else
-		return (set_err_msg(game, "\e[0;31mError: Invalid character"));
+		return (set_err_msg(game, "\e[1;31mError: Invalid character"));
 	struc->k++;// to check
 	return (0);
 }

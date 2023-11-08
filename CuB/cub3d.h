@@ -6,7 +6,7 @@
 /*   By: mfadil <mfadil@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/16 14:49:49 by mfadil            #+#    #+#             */
-/*   Updated: 2023/11/07 22:49:10 by mfadil           ###   ########.fr       */
+/*   Updated: 2023/11/08 17:15:38 by mfadil           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,14 @@ enum
 	ON_KEYDOWN = 2,
 	ON_KEYUP = 3,
 	ON_DESTROY = 17,
+};
+
+typedef struct s_garbage_collector	t_garbage_collector;
+struct s_garbage_collector
+{
+	void				*ptr;
+	int					isfreed;
+	t_garbage_collector	*next;
 };
 
 typedef struct s_iter
@@ -268,7 +276,7 @@ int		set_cub_error(t_main *game, char *message);
 int		init_cub3d(t_main *game);
 int		free_memory(t_main *game);
 int		key_hook_cub(int keycode, t_main *game);
-int		key_release(int keycode, t_main *game);
+int		init_keys(int keycode, t_main *game);
 void	check_collision(t_main *game, float δx, float δy);
 int		moving_character(t_main *game);
 int		check_is_wall(int c);
@@ -288,11 +296,12 @@ int		check_is_open(t_main *game, char *filename, int *fd);
 int		ft_occurences_counting(char *str, char c);
 int		ft_int_occurences_counting(int *str, int c, size_t size);
 int		ft_check_occurs(t_main *game);
-bool	is_line_empty(char *line);
+int		is_line_empty(char *line);
 int		map_parsing(t_main *game, char *line);
 int		parse_lineof_file(t_main *game, char *line);
 int		check_borders(t_main *game);
-int		ft_parser(t_main *game, char *filename);
+int		ft_parsing_cub(t_main *game, char *filename);
 int		identify_file_lines(t_main *game, char **arr);
+int		create_rgb(t_color color);
 
 #endif
