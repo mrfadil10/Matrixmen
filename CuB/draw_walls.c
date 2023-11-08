@@ -6,7 +6,7 @@
 /*   By: mfadil <mfadil@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/24 16:56:35 by mfadil            #+#    #+#             */
-/*   Updated: 2023/11/08 12:14:08 by mfadil           ###   ########.fr       */
+/*   Updated: 2023/11/08 21:05:15 by mfadil           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,10 @@
 
 unsigned int	get_textcolor(t_main *game, int txt, t_iter text_off)
 {
-	int	ind;
+	int	i;
 
-	ind = (text_off.i * SIZEOF_TILE) + text_off.j;
-	return (((unsigned int *) game->texture[txt].addr)[ind]);
+	i = (text_off.i * SIZEOF_TILE) + text_off.j;
+	return (((unsigned int *) game->texture[txt].addr)[i]);
 }
 
 void	put_stripes(t_main *game, t_iter text_off, t_iter iter, int i)

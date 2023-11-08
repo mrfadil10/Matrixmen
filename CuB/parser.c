@@ -6,7 +6,7 @@
 /*   By: mfadil <mfadil@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/27 10:48:25 by mfadil            #+#    #+#             */
-/*   Updated: 2023/11/08 16:35:32 by mfadil           ###   ########.fr       */
+/*   Updated: 2023/11/08 22:41:26 by mfadil           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,8 +76,6 @@ int	ft_parsing_cub(t_main *game, char *filename)
 	if (close(game->map.file.fd) == -1)
 		return (set_err_msg(game, "\e[1;31mError: could not close file"));
 	if (check_borders(game))
-		return (1);
-	if (ft_check_occurs(game))
 		return (1);
 	return (0);
 }

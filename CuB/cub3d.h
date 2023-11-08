@@ -6,7 +6,7 @@
 /*   By: mfadil <mfadil@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/16 14:49:49 by mfadil            #+#    #+#             */
-/*   Updated: 2023/11/08 17:15:38 by mfadil           ###   ########.fr       */
+/*   Updated: 2023/11/08 23:33:11 by mfadil           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,7 +102,7 @@ typedef struct s_file
 {
 	int		fd;
 	char	*path;
-} t_file;
+}	t_file;
 
 typedef struct s_img
 {
@@ -277,7 +277,7 @@ int		init_cub3d(t_main *game);
 int		free_memory(t_main *game);
 int		key_hook_cub(int keycode, t_main *game);
 int		init_keys(int keycode, t_main *game);
-void	check_collision(t_main *game, float δx, float δy);
+void	check_collision(t_main *game, float dx, float dy);
 int		moving_character(t_main *game);
 int		check_is_wall(int c);
 void	raycasting(t_main *game);
@@ -303,5 +303,6 @@ int		check_borders(t_main *game);
 int		ft_parsing_cub(t_main *game, char *filename);
 int		identify_file_lines(t_main *game, char **arr);
 int		create_rgb(t_color color);
+int		ft_int_occurences_counting(int *str, int c, size_t size);
 
 #endif

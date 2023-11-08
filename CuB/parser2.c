@@ -6,7 +6,7 @@
 /*   By: mfadil <mfadil@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/27 11:11:26 by mfadil            #+#    #+#             */
-/*   Updated: 2023/11/08 16:57:22 by mfadil           ###   ########.fr       */
+/*   Updated: 2023/11/08 17:33:45 by mfadil           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,19 +20,6 @@ int	ft_occurences_counting(char *str, char c)
 	i = 0;
 	count = 0;
 	while (str[i])
-		if (str[i++] == c)
-			count++;
-	return (count);
-}
-
-int	ft_int_occurences_counting(int *str, int c, size_t size)
-{
-	int	i;
-	int	count;
-
-	i = 0;
-	count = 0;
-	while ((size_t)i < size)
 		if (str[i++] == c)
 			count++;
 	return (count);

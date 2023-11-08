@@ -6,7 +6,7 @@
 /*   By: mfadil <mfadil@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/28 23:08:45 by mfadil            #+#    #+#             */
-/*   Updated: 2023/11/08 16:29:05 by mfadil           ###   ########.fr       */
+/*   Updated: 2023/11/08 22:41:45 by mfadil           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,19 @@ bool	is_a_border(int c)
 	if (c == 0 || c == PLAYER)
 		return (true);
 	return (false);
+}
+
+int	ft_int_occurences_counting(int *str, int c, size_t size)
+{
+	int	i;
+	int	count;
+
+	i = 0;
+	count = 0;
+	while ((size_t)i < size)
+		if (str[i++] == c)
+			count++;
+	return (count);
 }
 
 int	map_component(t_main *game, int i, int j)
@@ -74,6 +87,8 @@ int	check_borders(t_main *game)
 	}
 	iter.i = 0;
 	if (check_map_components(game, iter))
+		return (1);
+	if (ft_check_occurs(game))
 		return (1);
 	return (0);
 }

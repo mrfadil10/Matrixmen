@@ -6,7 +6,7 @@
 /*   By: mfadil <mfadil@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/16 14:47:53 by mfadil            #+#    #+#             */
-/*   Updated: 2023/11/08 16:16:17 by mfadil           ###   ########.fr       */
+/*   Updated: 2023/11/08 21:58:08 by mfadil           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ void	init_constants(t_main *game)
 	game->consts.ray_nb = SCREEN_WIDTH;
 	game->consts.scale = SCREEN_WIDTH / game->consts.ray_nb;
 	game->consts.angle_delta = game->consts.field_of_view / game->consts.ray_nb;
-	game->consts.rotation_speed = 90 * (M_PI / 180);
+	game->consts.rotation_speed = 60 * (M_PI / 180);
 }
 
 void	cub_keyhooks(t_main game)
