@@ -6,7 +6,7 @@
 /*   By: mfadil <mfadil@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/16 14:47:53 by mfadil            #+#    #+#             */
-/*   Updated: 2023/11/08 21:58:08 by mfadil           ###   ########.fr       */
+/*   Updated: 2023/11/09 20:20:20 by mfadil           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,9 +35,7 @@ void	cub_initialize(t_main *game, char *filename)
 	game->parsing.we = false;
 	game->parsing.floor = false;
 	game->parsing.ceiling = false;
-	game->paused = false;
-	game->freeze = false;
-	game->rays = (t_rays *)malloc(sizeof(t_rays) * game->consts.ray_nb);
+	game->rays = (t_rays *)ft_malloc(sizeof(t_rays) * game->consts.ray_nb);
 	if (!game->rays)
 		error_exit(game, "\e[1;31mMalloc failed");
 }
@@ -61,9 +59,9 @@ void	init_constants(t_main *game)
 
 void	cub_keyhooks(t_main game)
 {
-	mlx_hook(game.window.reference, ON_DESTROY, 0L, free_memory, &game);
-	mlx_hook(game.window.reference, ON_KEYDOWN, 0L, key_hook_cub, &game);
-	mlx_hook(game.window.reference, ON_KEYUP, 0L, init_keys, &game);
+	mlx_hook(game.window.reference, KEY_DESTROY, 0L, free_memory, &game);
+	mlx_hook(game.window.reference, KEY_DOWN, 0L, key_hook_cub, &game);
+	mlx_hook(game.window.reference, KEY_UP, 0L, init_keys, &game);
 	mlx_loop_hook(game.mlx, rendering_cub, &game);
 	mlx_loop(game.mlx);
 }
@@ -72,9 +70,9 @@ int	main(int ac, char **av)
 {
 	t_main	game;
 
+	ft_bzero(&game, sizeof(t_main));
 	if (ac != 2)
 		error_exit(&game, "Do: \e[1;33m./cub3D [filename].cub");
-	ft_bzero(&game, sizeof(t_main));
 	init_constants(&game);
 	if (ft_parsing_cub(&game, av[1]))
 		error_exit(&game, game.error.message);

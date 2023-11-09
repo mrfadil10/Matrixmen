@@ -6,7 +6,7 @@
 /*   By: mfadil <mfadil@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/16 14:49:49 by mfadil            #+#    #+#             */
-/*   Updated: 2023/11/08 23:33:11 by mfadil           ###   ########.fr       */
+/*   Updated: 2023/11/09 23:27:46 by mfadil           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,13 +71,6 @@ enum
 	TXT_WE,
 };
 
-enum
-{
-	ON_KEYDOWN = 2,
-	ON_KEYUP = 3,
-	ON_DESTROY = 17,
-};
-
 typedef struct s_garbage_collector	t_garbage_collector;
 struct s_garbage_collector
 {
@@ -130,8 +123,8 @@ typedef struct s_window
 
 typedef struct s_allocate
 {
-	bool	map;
 	bool	buffer;
+	bool	map;
 }	t_allocate;
 
 typedef struct s_list
@@ -143,6 +136,7 @@ typedef struct s_list
 
 typedef struct s_parsing
 {
+	int		lines_count;
 	bool	no;
 	bool	so;
 	bool	ea;
@@ -151,9 +145,8 @@ typedef struct s_parsing
 	bool	map;
 	bool	map_is_init;
 	bool	ceiling;
-	int		lines_before_map;
-	int		lowest_indent;
-}	t_parsing;
+	int		closest_dis;
+}	t_parser;
 
 typedef struct s_error
 {
@@ -177,17 +170,17 @@ typedef struct s_consts
 	float	rotation_speed;
 }	t_consts;
 
-typedef struct s_color
+typedef struct s_rgb
 {
 	int	r;
 	int	g;
 	int	b;
-}	t_color;
+}	t_rgb;
 
 typedef struct s_assets
 {
-	t_color	floor;
-	t_color	ceiling;
+	t_rgb	floor;
+	t_rgb	ceiling;
 	char	*north;
 	char	*south;
 	char	*east;
@@ -244,7 +237,7 @@ typedef struct s_init_map
 {
 	int		width;
 	int		height;
-	int		lowest_indent;
+	int		closest_dis;
 	char	*quick_line;
 	t_iter	iter;
 }	t_init_map;
@@ -252,13 +245,10 @@ typedef struct s_init_map
 typedef struct s_main
 {
 	void		*mlx;
-	bool		paused;
-	bool		freeze;
-	bool		over;
-	float		delta;
+	float		diff;
 	t_window	window;
 	t_map		map;
-	t_parsing	parsing;
+	t_parser	parsing;
 	t_allocate	allocs;
 	t_consts	consts;
 	t_img		frame;
@@ -302,7 +292,15 @@ int		parse_lineof_file(t_main *game, char *line);
 int		check_borders(t_main *game);
 int		ft_parsing_cub(t_main *game, char *filename);
 int		identify_file_lines(t_main *game, char **arr);
-int		create_rgb(t_color color);
+int		create_rgb(t_rgb color);
 int		ft_int_occurences_counting(int *str, int c, size_t size);
+void	horizon_steps(t_main *game, t_axes *distance, float *depth, int i);
+void	intersection(t_main *game, int i);
+void	map_setting_helper(t_main *game, float degre, int i, int j);
+bool	is_endof_line(char *str);
+int		is_line_empty(char *line);
+void	*ft_malloc(size_t size);
+void	ft_free(void *ptr);
+void	ft_exit(int status);
 
 #endif

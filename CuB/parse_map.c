@@ -6,7 +6,7 @@
 /*   By: mfadil <mfadil@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/27 21:53:28 by mfadil            #+#    #+#             */
-/*   Updated: 2023/11/08 16:18:03 by mfadil           ###   ########.fr       */
+/*   Updated: 2023/11/09 23:23:18 by mfadil           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,28 +18,21 @@ typedef struct s_parse_map
 	int	k;
 }	t_parse_map;
 
-static bool	is_endof_line(char *str)
-{
-	if (ft_strncmp(str, " \n", 2) == 0)
-		return (true);
-	return (false);
-}
-
 int	init_map_helper(t_main *game, t_init_map *struc)
 {
 	struc->iter.i = 0;
-	game->parsing.lowest_indent = struc->lowest_indent;
+	game->parsing.closest_dis = struc->closest_dis;
 	game->map.width = struc->width;
 	game->map.height = struc->height;
 	close(game->map.file.fd);
 	if (check_is_open(game, game->map.file.path, &game->map.file.fd))
 		return (1);
-	while (struc->iter.i < game->parsing.lines_before_map + 1)
+	while (struc->iter.i < game->parsing.lines_count + 1)
 	{
-		free(get_next_line(game->map.file.fd));
+		ft_free(get_next_line(game->map.file.fd));
 		struc->iter.i++;
 	}
-	game->map.array = (int **)malloc(sizeof(int *) * game->map.height);
+	game->map.array = (int **)ft_malloc(sizeof(int *) * game->map.height);
 	if (!game->map.array)
 		return (set_err_msg(game, "\e[1;31mError: malloc"));
 	game->parsing.map_is_init = true;
@@ -59,10 +52,10 @@ void	init_map_norm(t_init_map *struc)
 		struc->iter.j++;
 	if (struc->iter.j - struc->iter.i > struc->width)
 		struc->width = struc->iter.j - struc->iter.i;
-	if (struc->lowest_indent == -1)
-		struc->lowest_indent = struc->iter.i;
-	else if (struc->iter.i < struc->lowest_indent)
-		struc->lowest_indent = struc->iter.i;
+	if (struc->closest_dis == -1)
+		struc->closest_dis = struc->iter.i;
+	else if (struc->iter.i < struc->closest_dis)
+		struc->closest_dis = struc->iter.i;
 }
 
 int	initialize_map(t_main *game)
@@ -70,7 +63,7 @@ int	initialize_map(t_main *game)
 	t_init_map	struc;
 
 	ft_bzero(&struc, sizeof(t_init_map));
-	struc.lowest_indent = -1;
+	struc.closest_dis = -1;
 	while (1)
 	{
 		struc.quick_line = get_next_line(game->map.file.fd);
@@ -79,28 +72,17 @@ int	initialize_map(t_main *game)
 			break ;
 		if (is_line_empty(struc.quick_line))
 		{
-			free(struc.quick_line);
+			ft_free(struc.quick_line);
 			continue ;
 		}
 		init_map_norm(&struc);
-		free(struc.quick_line);
+		ft_free(struc.quick_line);
 	}
 	return (init_map_helper(game, &struc));
 }
 
-static void	map_setting_helper(t_main *game, float degre, int i, int j)
-{
-	game->character.position.x = j * SIZEOF_TILE + SIZEOF_TILE / 2;
-	game->character.position.y = i * SIZEOF_TILE + SIZEOF_TILE / 2;
-	game->character.width = 10;
-	game->character.height = 32;
-	game->character.mov_speed = 250;
-	game->character.rots_speed = game->consts.rotation_speed;
-	game->character.angle = degre;
-	game->map.array[i][j] = PLAYER;
-}
-
-static int	map_parsing_helper(t_main *game, t_parse_map *struc, char *line, int i)
+static int	map_parsing_helper(t_main *game, t_parse_map *struc,
+		char *line, int i)
 {
 	if (line[struc->k] == 'N')
 		map_setting_helper(game, 3 * M_PI / 2, i, struc->j);
@@ -116,7 +98,7 @@ static int	map_parsing_helper(t_main *game, t_parse_map *struc, char *line, int 
 		game->map.array[i][struc->j] = -1;
 	else
 		return (set_err_msg(game, "\e[1;31mError: Invalid character"));
-	struc->k++;// to check
+	struc->k++;
 	return (0);
 }
 
@@ -130,11 +112,11 @@ int	map_parsing(t_main *game, char *line)
 			return (1);
 	if (i >= game->map.height + 1)
 		return (set_err_msg(game, "\e[0;31mError: index out of range"));
-	game->map.array[i] = (int *)malloc(sizeof(int) * game->map.width);
+	game->map.array[i] = (int *)ft_malloc(sizeof(int) * game->map.width);
 	if (!game->map.array[i])
 		return (set_err_msg(game, "\e[0;31mError: malloc"));
 	struc.j = -1;
-	struc.k = game->parsing.lowest_indent;
+	struc.k = game->parsing.closest_dis;
 	while (++struc.j < game->map.width)
 	{
 		if (line[struc.k] && line[struc.k] != '\n')

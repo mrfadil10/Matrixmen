@@ -6,13 +6,13 @@
 /*   By: mfadil <mfadil@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 22:26:15 by mfadil            #+#    #+#             */
-/*   Updated: 2023/11/08 16:17:09 by mfadil           ###   ########.fr       */
+/*   Updated: 2023/11/09 23:23:36 by mfadil           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-int	create_rgb(t_color color)
+int	create_rgb(t_rgb color)
 {
 	return (color.r << 16 | color.g << 8 | color.b);
 }
@@ -71,4 +71,16 @@ int	init_cub3d(t_main *game)
 	if (init_textures(game))
 		return (1);
 	return (0);
+}
+
+void	map_setting_helper(t_main *game, float degre, int i, int j)
+{
+	game->character.position.x = j * SIZEOF_TILE + SIZEOF_TILE / 2;
+	game->character.position.y = i * SIZEOF_TILE + SIZEOF_TILE / 2;
+	game->character.width = 10;
+	game->character.height = 32;
+	game->character.mov_speed = 250;
+	game->character.rots_speed = game->consts.rotation_speed;
+	game->character.angle = degre;
+	game->map.array[i][j] = PLAYER;
 }

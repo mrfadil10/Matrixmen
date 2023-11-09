@@ -6,7 +6,7 @@
 /*   By: mfadil <mfadil@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/27 15:13:32 by mfadil            #+#    #+#             */
-/*   Updated: 2023/11/08 17:07:30 by mfadil           ###   ########.fr       */
+/*   Updated: 2023/11/09 14:49:59 by mfadil           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,13 +36,13 @@ static int	color_joiner(t_main *game, t_parse_color *str, char **line)
 		{
 			str->temp = str->join;
 			str->join = ft_strjoin(str->join, line[str->iter.i]);
-			free(str->temp);
+			ft_free(str->temp);
 		}
 	}
 	if (ft_occurences_counting(str->join, ',') != 2)
 		return (set_err_msg(game, "\e[1;31mError: Invalid color"));
 	str->rgb = ft_split(str->join, ",");
-	free(str->join);
+	ft_free(str->join);
 	printf("str->join = %s\n", str->join);
 	if (!str->rgb)
 		return (set_err_msg(game, "\e[1;31merror malloc"));
@@ -65,7 +65,7 @@ static int	color_helper(t_main *game, t_parse_color *str)
 				free_dbl_ptr((void **)str->rgb));
 		str->temp = str->rgb[str->iter.i];
 		str->rgb[str->iter.i] = str->trim;
-		free(str->temp);
+		ft_free(str->temp);
 		str->iter.j = 0;
 		while (str->rgb[str->iter.i][str->iter.j])
 		{
@@ -78,7 +78,7 @@ static int	color_helper(t_main *game, t_parse_color *str)
 	return (0);
 }
 
-int	parse_colors(t_main *game, t_color *rgb, char **arr, bool *is_colored)
+int	parse_colors(t_main *game, t_rgb *rgb, char **arr, bool *is_colored)
 {
 	t_parse_color	str;
 

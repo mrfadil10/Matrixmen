@@ -6,7 +6,7 @@
 /*   By: mfadil <mfadil@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/27 11:11:26 by mfadil            #+#    #+#             */
-/*   Updated: 2023/11/08 17:33:45 by mfadil           ###   ########.fr       */
+/*   Updated: 2023/11/09 23:27:16 by mfadil           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,18 +65,6 @@ int	check_extension(t_main *game)
 	return (0);
 }
 
-int	is_line_empty(char *line)
-{
-	int	i;
-
-	i = 0;
-	while ((line[i] >= 9 && line[i] <= 13) || line[i] == ' ')
-		i++;
-	if (line[i] == '\0' || line[i] == '\n')
-		return (1);
-	return (0);
-}
-
 int	check_map(t_main *game, char *line)
 {
 	static unsigned int	line_before_map = 0;
@@ -86,7 +74,7 @@ int	check_map(t_main *game, char *line)
 		&& game->parsing.floor && game->parsing.ceiling && !game->parsing.map
 		&& !is_line_empty(line))
 	{
-		game->parsing.lines_before_map = line_before_map;
+		game->parsing.lines_count = line_before_map;
 		game->parsing.map = true;
 	}
 	if (!game->parsing.map)
@@ -116,7 +104,7 @@ int	parse_config(t_main *game)
 		check_map(game, line);
 		if (parse_lineof_file(game, line))
 			return (free_cub3d(line), 1);
-		free(line);
+		ft_free(line);
 	}
 	return (0);
 }

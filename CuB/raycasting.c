@@ -6,33 +6,11 @@
 /*   By: mfadil <mfadil@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/21 17:25:01 by mfadil            #+#    #+#             */
-/*   Updated: 2023/11/08 12:24:09 by mfadil           ###   ########.fr       */
+/*   Updated: 2023/11/09 23:18:55 by mfadil           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-
-void	horizon_steps(t_main *game, t_axes *distance, float *depth, int i)
-{
-	if (game->rays[i].sin_x > 0)
-	{
-		distance->y = SIZEOF_TILE;
-		game->rays[i].horz_pt.y = (game->character.map_pos.y + 1) * SIZEOF_TILE;
-	}
-	else
-	{
-		distance->y = -SIZEOF_TILE;
-		game->rays[i].horz_pt.y = game->character.map_pos.y
-			* SIZEOF_TILE - 0.0001;
-	}
-	game->rays[i].horz_depth = game->rays[i].horz_pt.y
-		- game->character.position.y;
-	game->rays[i].horz_depth /= game->rays[i].sin_x;
-	game->rays[i].horz_pt.x = game->rays[i].horz_depth * game->rays[i].cos_x;
-	game->rays[i].horz_pt.x += game->character.position.x;
-	*depth = distance->y / game->rays[i].sin_x;
-	distance->x = *depth * game->rays[i].cos_x;
-}
 
 void	vertical_steps(t_main *game, t_axes *distance, float *depth, int i)
 {
@@ -101,26 +79,6 @@ void	vertical_inter(t_main *game, t_axes *distance, float depth, int i)
 		game->rays[i].vert_pt.x += distance->x;
 		game->rays[i].vert_pt.y += distance->y;
 		j++;
-	}
-}
-
-void	intersection(t_main *game, int i)
-{
-	if (game->rays[i].vert_depth < game->rays[i].horz_depth)
-	{
-		game->rays[i].vert_pt.y = fmod(game->rays[i].vert_pt.y, SIZEOF_TILE);
-		game->rays[i].depth = game->rays[i].vert_depth;
-		game->rays[i].proj_pt = game->rays[i].vert_pt;
-		game->rays[i].hit_content = game->rays[i].content_y;
-		game->rays[i].vertical_hit = true;
-	}
-	else
-	{
-		game->rays[i].horz_pt.x = fmod(game->rays[i].horz_pt.x, SIZEOF_TILE);
-		game->rays[i].depth = game->rays[i].horz_depth;
-		game->rays[i].proj_pt = game->rays[i].horz_pt;
-		game->rays[i].hit_content = game->rays[i].content_x;
-		game->rays[i].vertical_hit = false;
 	}
 }
 

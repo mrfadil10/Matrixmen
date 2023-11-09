@@ -6,11 +6,33 @@
 /*   By: mfadil <mfadil@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/20 23:23:50 by mfadil            #+#    #+#             */
-/*   Updated: 2023/11/08 16:10:45 by mfadil           ###   ########.fr       */
+/*   Updated: 2023/11/09 23:19:44 by mfadil           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+
+void	horizon_steps(t_main *game, t_axes *distance, float *depth, int i)
+{
+	if (game->rays[i].sin_x > 0)
+	{
+		distance->y = SIZEOF_TILE;
+		game->rays[i].horz_pt.y = (game->character.map_pos.y + 1) * SIZEOF_TILE;
+	}
+	else
+	{
+		distance->y = -SIZEOF_TILE;
+		game->rays[i].horz_pt.y = game->character.map_pos.y
+			* SIZEOF_TILE - 0.0001;
+	}
+	game->rays[i].horz_depth = game->rays[i].horz_pt.y
+		- game->character.position.y;
+	game->rays[i].horz_depth /= game->rays[i].sin_x;
+	game->rays[i].horz_pt.x = game->rays[i].horz_depth * game->rays[i].cos_x;
+	game->rays[i].horz_pt.x += game->character.position.x;
+	*depth = distance->y / game->rays[i].sin_x;
+	distance->x = *depth * game->rays[i].cos_x;
+}
 
 int	check_is_wall(int c)
 {
@@ -50,7 +72,7 @@ int	moving_character(t_main *game)
 
 	diff.x = 0;
 	diff.y = 0;
-	speed_mov = game->character.mov_speed * game->delta;
+	speed_mov = game->character.mov_speed * game->diff;
 	cos_vitesse = speed_mov * cos(game->character.angle);
 	sin_vitesse = speed_mov * sin(game->character.angle);
 	diff.x += game->character.walk_dir * (-cos_vitesse);

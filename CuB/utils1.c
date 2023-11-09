@@ -6,7 +6,7 @@
 /*   By: mfadil <mfadil@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 11:32:19 by mfadil            #+#    #+#             */
-/*   Updated: 2023/10/20 14:04:46 by mfadil           ###   ########.fr       */
+/*   Updated: 2023/11/09 23:19:35 by mfadil           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int	set_cub_error(t_main *game, char *message)
 
 int	free_cub3d(void *ptr)
 {
-	free(ptr);
+	ft_free(ptr);
 	return (1);
 }
 
