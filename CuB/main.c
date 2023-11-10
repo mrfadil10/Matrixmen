@@ -6,7 +6,7 @@
 /*   By: mfadil <mfadil@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/16 14:47:53 by mfadil            #+#    #+#             */
-/*   Updated: 2023/11/09 20:20:20 by mfadil           ###   ########.fr       */
+/*   Updated: 2023/11/10 12:07:58 by mfadil           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,13 +44,11 @@ void	init_constants(t_main *game)
 {
 	game->consts.fps = 1000 / FPS;
 	game->consts.tau = 2 * M_PI;
-	game->consts.mid_width = SCREEN_WIDTH / 2;
 	game->consts.mid_height = SCREEN_HEIGHT / 2;
 	game->consts.field_of_view = 60 * (M_PI / 180);
 	game->consts.half_fov = game->consts.field_of_view / 2;
 	game->consts.screen_distance = (SCREEN_WIDTH / 2)
 		/ tan(game->consts.half_fov);
-	game->consts.half_ray_nb = game->consts.ray_nb / 2;
 	game->consts.ray_nb = SCREEN_WIDTH;
 	game->consts.scale = SCREEN_WIDTH / game->consts.ray_nb;
 	game->consts.angle_delta = game->consts.field_of_view / game->consts.ray_nb;

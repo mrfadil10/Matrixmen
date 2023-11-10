@@ -6,7 +6,7 @@
 /*   By: mfadil <mfadil@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/16 14:49:49 by mfadil            #+#    #+#             */
-/*   Updated: 2023/11/09 23:27:46 by mfadil           ###   ########.fr       */
+/*   Updated: 2023/11/10 12:08:03 by mfadil           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -157,13 +157,11 @@ typedef struct s_error
 typedef struct s_consts
 {
 	int		ray_nb;
-	float	half_ray_nb;
 	float	field_of_view;
 	float	half_fov;
 	float	fps;
 	float	tau;
 	float	scale;
-	float	mid_width;
 	float	mid_height;
 	float	angle_delta;
 	float	screen_distance;
@@ -228,8 +226,8 @@ typedef struct s_rays
 typedef struct s_draw_walls
 {
 	int			i;
-	int			wall_top_pixel;
-	int			wall_bottom_pixel;
+	int			top_pixel;
+	int			bot_pixel;
 	float		depth;
 }	t_draw_walls;
 

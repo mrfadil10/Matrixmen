@@ -6,7 +6,7 @@
 /*   By: mfadil <mfadil@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/24 16:56:35 by mfadil            #+#    #+#             */
-/*   Updated: 2023/11/08 21:05:15 by mfadil           ###   ########.fr       */
+/*   Updated: 2023/11/10 11:51:40 by mfadil           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ void	put_stripes(t_main *game, t_iter text_off, t_iter iter, int i)
 	put_pixel(game, colored_txt, iter.i * game->consts.scale, i);
 }
 
-void	drawing_stripe(t_main *game, t_iter iter, int top_wall, int wall_bottom)
+void	drawing_stripe(t_main *game, t_iter iter, int top_wall, int bot_wall)
 {
 	t_iter	text_offset;
 	float	d;
@@ -54,7 +54,7 @@ void	drawing_stripe(t_main *game, t_iter iter, int top_wall, int wall_bottom)
 		text_offset.j = (int)game->rays[iter.i].horz_pt.x;
 	d = SIZEOF_TILE / game->rays[iter.i].proj_height;
 	i = top_wall;
-	while (i < wall_bottom)
+	while (i < bot_wall)
 	{
 		text_offset.i = (i + (int)game->rays[iter.i].proj_height / 2
 				- game->consts.mid_height) * d;
@@ -87,21 +87,21 @@ void	drawing_walls(t_main *game, t_iter iter, float ray_angle)
 		* (float) cos(game->character.angle - ray_angle);
 	game->rays[iter.i].proj_height = (SIZEOF_TILE / str.depth)
 		* game->consts.screen_distance;
-	str.wall_top_pixel = game->consts.mid_height
+	str.top_pixel = game->consts.mid_height
 		- (int) game->rays[iter.i].proj_height / 2;
-	if (str.wall_top_pixel < 0)
-		str.wall_top_pixel = 0;
-	str.wall_bottom_pixel = game->consts.mid_height
+	if (str.top_pixel < 0)
+		str.top_pixel = 0;
+	str.bot_pixel = game->consts.mid_height
 		+ (int) game->rays[iter.i].proj_height / 2;
-	if (str.wall_bottom_pixel > SCREEN_HEIGHT)
-		str.wall_bottom_pixel = SCREEN_HEIGHT;
+	if (str.bot_pixel > SCREEN_HEIGHT)
+		str.bot_pixel = SCREEN_HEIGHT;
 	str.i = -1;
-	while (++str.i < str.wall_top_pixel)
+	while (++str.i < str.top_pixel)
 		put_pixel(game, create_rgb(game->assets.ceiling), iter.i
 			* game->consts.scale, str.i);
-	drawing_stripe(game, iter, str.wall_top_pixel, str.wall_bottom_pixel);
-	str.i = str.wall_bottom_pixel - 1;
-	while (++str.i < SCREEN_HEIGHT)
+	drawing_stripe(game, iter, str.top_pixel, str.bot_pixel);
+	str.i = str.bot_pixel - 1;
+	while (str.i < SCREEN_HEIGHT)
 		put_pixel(game, create_rgb(game->assets.floor),
-			iter.i * game->consts.scale, str.i);
+			iter.i * game->consts.scale, ++str.i);
 }
