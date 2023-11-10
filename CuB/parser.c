@@ -6,7 +6,7 @@
 /*   By: mfadil <mfadil@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/27 10:48:25 by mfadil            #+#    #+#             */
-/*   Updated: 2023/11/09 14:37:00 by mfadil           ###   ########.fr       */
+/*   Updated: 2023/11/10 17:07:41 by mfadil           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,6 @@ int	parse_lineof_file(t_main *game, char *line)
 	split = ft_split(line, " \t\n");
 	if (!split)
 		return (set_err_msg(game, "\e[1;31merror malloc"));
-	printf("split[0] = %s\n", split[0]);
 	if (identify_file_lines(game, split))
 		return (free_dbl_ptr((void **)split), 1);
 	free_dbl_ptr((void **)split);

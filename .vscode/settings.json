@@ -3,6 +3,9 @@
 		"*.excalidraw": "json",
 		"*.excalidrawlib": "json",
 		"bit": "c",
-		"cub3d.h": "c"
+		"cub3d.h": "c",
+		"ios": "c",
+		"istream": "c",
+		"locale": "c"
 	}
 }

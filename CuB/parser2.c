@@ -6,7 +6,7 @@
 /*   By: mfadil <mfadil@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/27 11:11:26 by mfadil            #+#    #+#             */
-/*   Updated: 2023/11/09 23:27:16 by mfadil           ###   ########.fr       */
+/*   Updated: 2023/11/10 17:06:12 by mfadil           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,6 @@ int	parse_config(t_main *game)
 	while (1)
 	{
 		line = get_next_line(game->map.file.fd);
-		printf("-->%s\n", line);
 		if (!line)
 			break ;
 		if (is_line_empty(line))

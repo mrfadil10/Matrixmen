@@ -6,7 +6,7 @@
 /*   By: mfadil <mfadil@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/19 22:29:31 by mfadil            #+#    #+#             */
-/*   Updated: 2023/11/09 23:17:16 by mfadil           ###   ########.fr       */
+/*   Updated: 2023/11/10 15:33:50 by mfadil           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,6 @@ void	intersection(t_main *game, int i)
 		game->rays[i].vert_pt.y = fmod(game->rays[i].vert_pt.y, SIZEOF_TILE);
 		game->rays[i].depth = game->rays[i].vert_depth;
 		game->rays[i].proj_pt = game->rays[i].vert_pt;
-		game->rays[i].hit_content = game->rays[i].content_y;
 		game->rays[i].vertical_hit = true;
 	}
 	else
@@ -29,7 +28,6 @@ void	intersection(t_main *game, int i)
 		game->rays[i].horz_pt.x = fmod(game->rays[i].horz_pt.x, SIZEOF_TILE);
 		game->rays[i].depth = game->rays[i].horz_depth;
 		game->rays[i].proj_pt = game->rays[i].horz_pt;
-		game->rays[i].hit_content = game->rays[i].content_x;
 		game->rays[i].vertical_hit = false;
 	}
 }

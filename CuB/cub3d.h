@@ -6,7 +6,7 @@
 /*   By: mfadil <mfadil@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/16 14:49:49 by mfadil            #+#    #+#             */
-/*   Updated: 2023/11/10 12:08:03 by mfadil           ###   ########.fr       */
+/*   Updated: 2023/11/10 16:23:35 by mfadil           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,9 +31,7 @@
 # define SCREEN_HEIGHT 500
 # define FPS 60
 # define SIZEOF_TILE 64
-# define CHAR_SCALE 3
-# define CHAR_WIDTH 10
-# define CHAR_HEIGHT 32
+# define CHAR_SCALE 5
 # define MAX_DEPTH 100
 
 enum
@@ -193,11 +191,8 @@ typedef struct s_err
 
 typedef struct s_character
 {
-	int			width;
-	int			height;
 	float		angle;
 	float		mov_speed;
-	float		rots_speed;
 	float		rots_dir;
 	int			walk_dir;
 	int			turn_dir;
@@ -207,7 +202,6 @@ typedef struct s_character
 
 typedef struct s_rays
 {
-	int			hit_content;
 	bool		vertical_hit;
 	float		angle;
 	float		cos_x;
@@ -216,8 +210,6 @@ typedef struct s_rays
 	float		proj_height;
 	float		vert_depth;
 	float		horz_depth;
-	float		content_x;
-	float		content_y;
 	t_axes		proj_pt;
 	t_axes		vert_pt;
 	t_axes		horz_pt;

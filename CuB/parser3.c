@@ -6,7 +6,7 @@
 /*   By: mfadil <mfadil@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/27 15:13:32 by mfadil            #+#    #+#             */
-/*   Updated: 2023/11/09 14:49:59 by mfadil           ###   ########.fr       */
+/*   Updated: 2023/11/10 17:08:55 by mfadil           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,6 @@ static int	color_joiner(t_main *game, t_parse_color *str, char **line)
 	str->iter.i = -1;
 	while (line[++str->iter.i])
 	{
-		printf("line[0] = %s\n", line[0]);
 		if (str->iter.i == 0)
 			continue ;
 		else
@@ -43,7 +42,6 @@ static int	color_joiner(t_main *game, t_parse_color *str, char **line)
 		return (set_err_msg(game, "\e[1;31mError: Invalid color"));
 	str->rgb = ft_split(str->join, ",");
 	ft_free(str->join);
-	printf("str->join = %s\n", str->join);
 	if (!str->rgb)
 		return (set_err_msg(game, "\e[1;31merror malloc"));
 	return (0);
@@ -86,7 +84,6 @@ int	parse_colors(t_main *game, t_rgb *rgb, char **arr, bool *is_colored)
 		return (set_err_msg(game, "\e[1;31mError: Duplicate identifier"));
 	if (color_joiner(game, &str, arr))
 		return (1);
-	printf("arr[1] = %s\n", arr[1]);
 	if (color_helper(game, &str))
 		return (1);
 	rgb->r = ft_atoi(str.rgb[0]);

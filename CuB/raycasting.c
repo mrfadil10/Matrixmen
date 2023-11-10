@@ -6,7 +6,7 @@
 /*   By: mfadil <mfadil@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/21 17:25:01 by mfadil            #+#    #+#             */
-/*   Updated: 2023/11/09 23:18:55 by mfadil           ###   ########.fr       */
+/*   Updated: 2023/11/10 15:45:57 by mfadil           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,10 +47,7 @@ void	horizontal_inter(t_main *game, t_axes *distance, float depth, int i)
 		if (tile.j >= game->map.width || tile.i >= game->map.height)
 			break ;
 		if (check_is_wall(game->map.array[tile.i][tile.j]))
-		{
-			game->rays[i].content_x = game->map.array[tile.i][tile.j];
 			break ;
-		}
 		game->rays[i].horz_depth += depth;
 		game->rays[i].horz_pt.x += distance->x;
 		game->rays[i].horz_pt.y += distance->y;
@@ -71,10 +68,7 @@ void	vertical_inter(t_main *game, t_axes *distance, float depth, int i)
 		if (tile.j >= game->map.width || tile.i >= game->map.height)
 			break ;
 		if (check_is_wall(game->map.array[tile.i][tile.j]))
-		{
-			game->rays[i].content_y = game->map.array[tile.i][tile.j];
 			break ;
-		}
 		game->rays[i].vert_depth += depth;
 		game->rays[i].vert_pt.x += distance->x;
 		game->rays[i].vert_pt.y += distance->y;
