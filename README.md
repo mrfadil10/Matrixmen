@@ -91,6 +91,3 @@ cub3D/
 - GCC
 - Make
 - X11 development files
-
-## Author
-[Your Name](@yourusername)
