@@ -1,4 +1,4 @@
-# Cub3D
+# Matrixmen
 
 A raycasting game engine inspired by Wolfenstein 3D, built using the MinilibX graphics library.
 ## Usage
